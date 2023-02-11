@@ -2,29 +2,11 @@
     "name": "InputActions",
     "maps": [
         {
-            "name": "Movimentação",
+            "name": "Movement",
             "id": "7251ee27-2ea4-4f29-8344-f6a5ff795222",
             "actions": [
                 {
-                    "name": "Avancar",
-                    "type": "Button",
-                    "id": "d11f9845-07b8-42a1-bf9b-8e40997c0910",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Hold(duration=0.1)",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Rotacionar",
-                    "type": "Value",
-                    "id": "ea2fef57-108a-43f0-87e6-aa254bf94497",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "Hold(duration=0.2)",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "TiroFrontal",
+                    "name": "FrontalShot",
                     "type": "Button",
                     "id": "feb62468-1a1d-44de-8dcb-5f113e671ea9",
                     "expectedControlType": "Button",
@@ -33,60 +15,34 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "TiroLateral",
+                    "name": "LateralShot",
                     "type": "Button",
                     "id": "61bc3747-1bc3-43c4-866a-1ab9fa01c99c",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "9e936334-82df-43a4-9fb9-2d7badac64a4",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "Hold(duration=0.3,pressPoint=0.2)",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Rotate",
+                    "type": "Value",
+                    "id": "8b708cd3-b907-4483-8215-8851914c5b9c",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "Hold(duration=0.3,pressPoint=0.2)",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "4321548b-9199-4494-a163-7fb14f249962",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard Scheme",
-                    "action": "Avancar",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ba0fbf75-c00d-46ec-aeac-a54c1bd6431f",
-                    "path": "<Keyboard>/upArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard Scheme",
-                    "action": "Avancar",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "fb782157-57bc-4dfa-9228-9a6fe5a70ee4",
-                    "path": "<Gamepad>/leftStick/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad Scheme",
-                    "action": "Avancar",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6778470d-0519-4b28-8603-825290548180",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad Scheme",
-                    "action": "Avancar",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "56731c53-7e07-4254-a5fb-334d7f1b2c35",
@@ -94,7 +50,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard Scheme",
-                    "action": "TiroFrontal",
+                    "action": "FrontalShot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -105,7 +61,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard Scheme",
-                    "action": "TiroFrontal",
+                    "action": "FrontalShot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -116,7 +72,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad Scheme",
-                    "action": "TiroFrontal",
+                    "action": "FrontalShot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -127,7 +83,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard Scheme",
-                    "action": "TiroLateral",
+                    "action": "LateralShot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -138,7 +94,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard Scheme",
-                    "action": "TiroLateral",
+                    "action": "LateralShot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -149,84 +105,161 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad Scheme",
-                    "action": "TiroLateral",
+                    "action": "LateralShot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "1D Axis",
-                    "id": "b4a47148-cc89-4341-b2f0-1145645a9170",
+                    "id": "fb79f329-682e-457b-9060-0d268dab236c",
                     "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Rotacionar",
+                    "action": "Move",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "negative",
-                    "id": "786920ae-1573-4e35-a970-474f18417f9b",
-                    "path": "<Keyboard>/a",
+                    "name": "positive",
+                    "id": "8ba23d5e-2c32-4585-89f2-9706142e3854",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Rotacionar",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "negative",
-                    "id": "e5d68be7-b273-4c17-912e-69832db5798f",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Rotacionar",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "negative",
-                    "id": "85eee010-3ba0-42c1-9d64-0e60814bb10f",
-                    "path": "<Gamepad>/leftStick/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Rotacionar",
+                    "groups": "Keyboard Scheme",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "positive",
-                    "id": "04dc0e76-b117-475b-8309-343a1b0dc5ce",
+                    "id": "001fd31f-f2fa-44bf-84ef-8a9dd9817ea9",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard Scheme",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "9f876c49-4984-441e-a395-6e0fb2b2d189",
+                    "path": "<Gamepad>/leftStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad Scheme",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "negative",
+                    "id": "aa6bb471-4da4-4bcc-99fe-31ef9463bb54",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard Scheme",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "negative",
+                    "id": "4055395b-fd83-486c-924f-3f57fb31ab32",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard Scheme",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "negative",
+                    "id": "c5658509-5197-4d50-ae02-155034021dbb",
+                    "path": "<Gamepad>/leftStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad Scheme",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "dc3e0bcf-78ee-49cf-b7a5-21ff1e5a7efd",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotate",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "positive",
+                    "id": "e7581836-52dc-497f-af52-adf6c49f7c6b",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Rotacionar",
+                    "action": "Rotate",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "positive",
-                    "id": "650e18d1-2de4-4404-90f5-eecc217512fc",
+                    "id": "8bd7441a-b4f1-4051-8cf4-d3894bc71bdc",
                     "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Rotacionar",
+                    "action": "Rotate",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "positive",
-                    "id": "1580ef95-edf8-4690-833f-5c9c938408fb",
+                    "id": "61b61fcc-ea5e-4503-b5ac-93c9a2a95b93",
                     "path": "<Gamepad>/leftStick/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Rotacionar",
+                    "action": "Rotate",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "negative",
+                    "id": "77aa2eeb-ebba-4203-8c3b-089ae56e1e43",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotate",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "negative",
+                    "id": "7219b435-ccd3-4be1-bc50-610fee7a59e1",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotate",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "negative",
+                    "id": "fa4c9d80-a8e1-43af-bdc4-4e88e5a5592b",
+                    "path": "<Gamepad>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotate",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }

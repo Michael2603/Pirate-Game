@@ -303,7 +303,7 @@ GameObject:
   - component: {fileID: 834835868}
   - component: {fileID: 834835867}
   m_Layer: 0
-  m_Name: Ilhas
+  m_Name: Islands
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1243,7 +1243,7 @@ GameObject:
   - component: {fileID: 1398904675}
   - component: {fileID: 1398904674}
   m_Layer: 0
-  m_Name: Agua
+  m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4730,14 +4730,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2139095160}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0.48, y: -3.97, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!114 &2139095163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4785,7 +4785,7 @@ MonoBehaviour:
     m_ActionName: "Movimenta\xE7\xE3o/RotacionarEsquerda[/Keyboard/a,/Keyboard/leftArrow]"
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: "Movimenta\xE7\xE3o"
+  m_DefaultActionMap: Movement
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &2139095164
@@ -4800,7 +4800,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86d3a875b70045d499f4934262a889ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VelocidadeAvanco: 5
+  ForwardMovementSpeed: 3
+  RotationSpeed: 1
 --- !u!50 &2139095165
 Rigidbody2D:
   serializedVersion: 4
