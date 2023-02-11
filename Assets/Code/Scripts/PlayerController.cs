@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public float ForwardMovementSpeed;
     public float RotationSpeed;
@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     private float _inputY;
     private float _smoothMovementVelocity;
     private float _movementInputSmoothVelocity;
+
+    public GameObject _cannonBall;
 
 
     private void Start()
@@ -58,5 +60,11 @@ public class Player : MonoBehaviour
     private void OnRotate(InputValue value)
     {
         _inputX = -value.Get<float>();
+    }
+
+    private void OnFrontalShot()
+    {
+        GameObject tempCannonBall = Instantiate(_cannonBall, transform.position, transform.rotation);
+        tempCannonBall.GetComponent<Rigidbody2D>().AddForce(transform.right * 300);
     }
 }
