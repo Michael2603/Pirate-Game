@@ -91,18 +91,23 @@ public class BoatController : MonoBehaviour
         {
             _healthBar.value = CurrentHealth;
         }
-        
+
         _animator.SetInteger("CurrentHealthAmount", CurrentHealth);
     }
 
 
+    // Takes the direction that the boat needs to rotate.
     protected void Rotate(float direction)
     {
         _rotationDirection = direction;
     }
 
+    // Takes the current desired force to move the boat forward.
     protected void MoveForward(float currentSpeed)
     {
+        if (currentSpeed < 0)
+            return;
+        
         _moveForwardCurrentForce = currentSpeed;
     }
 }
