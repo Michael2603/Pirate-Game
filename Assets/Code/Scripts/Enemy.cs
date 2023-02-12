@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : BoatController
 {
-    
-    protected void Rotacionar()
+    void FixedUpdate()
     {
+        Movement();
+
+        base.Rotate(1);
+        base.MoveForward(1);
 
     }
 
-    protected void Avancar()
+    private void Attack()
     {
 
     }

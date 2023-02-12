@@ -8,9 +8,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text _scoreText;
     private int _scoreAmount;
 
-    void Update()
+    void Awake()
     {
-        
+        Random.InitState(System.DateTime.Now.Second);
     }
 
     public void Score(int amount)
