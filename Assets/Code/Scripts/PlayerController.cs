@@ -16,7 +16,11 @@ public class PlayerController : BoatController
         base.MoveForward(_inputY);
     }
 
-
+    public override void TakeHit(int damage)
+    {
+        base.TakeHit(damage);
+        base._uiManager.UpdateScore(-12);
+    }
 
     // ---------------------------------------- Callbacks for Input System ----------------------------------------------- \\
 

@@ -7,10 +7,12 @@ public class Enemy : BoatController
     void FixedUpdate()
     {
         Movement();
+    }
 
-        base.Rotate(1);
-        base.MoveForward(1);
-
+    public override void TakeHit(int damage)
+    {
+        base.TakeHit(damage);
+        base._uiManager.UpdateScore(12);
     }
 
     private void Attack()

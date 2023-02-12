@@ -9,6 +9,7 @@ public class BoatController : MonoBehaviour
     public float ForwardMovementSpeed;
     public float RotationSpeed;
     [HideInInspector] public int CurrentHealth;
+    [HideInInspector] public UIManager _uiManager;
     public GameObject CannonBall;
     public float CannonFireStrength;
 
@@ -21,7 +22,6 @@ public class BoatController : MonoBehaviour
     protected Rigidbody2D _rigidbody2d;
     private Animator _animator;
     private Slider _healthBar;
-    private UIManager _uiManager;
 
     private float _rotationDirection;
     private float _moveForwardCurrentForce;
@@ -30,12 +30,12 @@ public class BoatController : MonoBehaviour
     private float _movementInputSmoothVelocity;
 
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _rigidbody2d = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
-        _healthBar = transform.GetChild(0).GetChild(0).gameObject.GetComponent<Slider>();
         _uiManager = GameObject.Find("Manager").GetComponent<UIManager>();
+        _healthBar = transform.GetChild(0).GetChild(0).gameObject.GetComponent<Slider>();
         
         CurrentHealth = 100;
     }
@@ -73,7 +73,7 @@ public class BoatController : MonoBehaviour
     }
 
     // Damages the player and update its health.
-    public void TakeHit(int damage)
+    public virtual void TakeHit(int damage)
     {
         CurrentHealth -= damage;
         HealthHandler();
@@ -82,7 +82,16 @@ public class BoatController : MonoBehaviour
     // Atualiza os dados referentes à vida do barco.
     private void HealthHandler()
     {
-        _healthBar.value = CurrentHealth;
+        if (CurrentHealth <= 0)
+        {
+            CurrentHealth = 0;
+            _healthBar.transform.parent.gameObject.SetActive(false);
+        }
+        else
+        {
+            _healthBar.value = CurrentHealth;
+        }
+        
         _animator.SetInteger("CurrentHealthAmount", CurrentHealth);
     }
 

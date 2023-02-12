@@ -10,12 +10,19 @@ public class UIManager : MonoBehaviour
 
     void Awake()
     {
+        // Changes the Seed of Random function to improve unpredictability.
         Random.InitState(System.DateTime.Now.Second);
     }
 
-    public void Score(int amount)
+    // Changes the total score and updates the UI to match the current score.
+    public void UpdateScore(int amount)
     {
         _scoreAmount += amount;
+
+        if (_scoreAmount < 0)
+        {
+            _scoreAmount = 0;
+        }
 
         _scoreText.SetText("Pontuação: " + _scoreAmount);
     }

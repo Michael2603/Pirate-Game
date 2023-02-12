@@ -12,11 +12,12 @@ public class CannonBallController : MonoBehaviour
         GetComponent<TrailRenderer>().widthMultiplier = Random.Range(.3f, 1.2f);
     }
 
+    // Destroys itself and damages a boat if hit it.
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            print("Hitted and Enemy");
+            other.gameObject.GetComponent<BoatController>().TakeHit(10);
         }
 
         Destroy(this.gameObject);
