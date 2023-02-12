@@ -6,12 +6,19 @@ public class CannonBallController : MonoBehaviour
 {
     private TrailRenderer _trailRenderer;
 
-    void Awake()
+    private void Awake()
     {
         // Randomly changes the size of trails when instantiated.
-        Random.InitState(System.DateTime.Now.Second);
         GetComponent<TrailRenderer>().widthMultiplier = Random.Range(.3f, 1.2f);
     }
 
-    
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            print("Hitted and Enemy");
+        }
+
+        Destroy(this.gameObject);
+    }
 }
