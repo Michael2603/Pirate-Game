@@ -146,6 +146,19 @@ public class BoatController : MonoBehaviour
         _healthBarMaterial.color = tempColor;
     }
 
+    // Used by the animations behaviour. Makes the boat emmmit more flames particles until its last visual state.
+    public void EmmitParticles()
+    {
+        if (transform.GetChild(1).GetComponent<ParticleSystem>().emissionRate >= 2)
+        {
+            transform.GetChild(1).GetComponent<ParticleSystem>().Stop();
+        }
+        else
+        {
+            transform.GetChild(1).GetComponent<ParticleSystem>().emissionRate++;
+        }
+    }
+
 
     // Takes the direction that the boat needs to rotate.
     protected void Rotate(float direction)
