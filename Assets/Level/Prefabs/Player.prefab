@@ -171,7 +171,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -394,6 +394,7 @@ GameObject:
   - component: {fileID: 4717341015024957816}
   - component: {fileID: 261615069844831368}
   - component: {fileID: 2212796834048080443}
+  - component: {fileID: 1100160937}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -408,7 +409,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6482422493734474546}
-  m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -528,12 +529,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86d3a875b70045d499f4934262a889ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ForwardMovementSpeed: 3
-  RotationSpeed: 1
   CurrentHealth: 0
   _uiManager: {fileID: 0}
+  ForwardMovementSpeed: 3
+  RotationSpeed: 1
   CannonBall: {fileID: 4288485827351727061, guid: ed2c67e3316b0f0449d78ea8090b8899, type: 3}
   CannonFireStrength: 3
+  _camera: {fileID: 0}
 --- !u!114 &2212796834048080443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -584,3 +586,23 @@ MonoBehaviour:
   m_DefaultActionMap: Movement
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!95 &1100160937
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6482422493734474546}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7fbe828d3b3cd1f438ec1d345be1e8ff, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

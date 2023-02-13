@@ -63,19 +63,17 @@ public class PlayerController : BoatController
     // Fires 3 cannonballs at the side of boat.
     private void OnLateralShot()
     {
-        List<GameObject> tempCannonBalls = new List<GameObject>();
         int shotPosition = -1;
 
-        // Instantiate 3 bullets and store them inside a list.
+        // Fires 3 bullets to the side of the boat.
         for (int i = 0; i < 3; i++, shotPosition++)
         {
-            // The cannonballs are being created at 180 points in Z axis, making them shake for the camera noise
-            tempCannonBalls.Add(Instantiate(
+            GameObject tempCannonBall = Instantiate(
                 base.CannonBall,
-                transform.localPosition + transform.rotation.eulerAngles + Vector3.one * shotPosition,
-                transform.rotation));
+                transform.position + (transform.up * (shotPosition / 5f)),
+                transform.rotation);
 
-            tempCannonBalls[i].GetComponent<Rigidbody2D>().AddForce(-transform.right * base._cannonFireStrength);
+            tempCannonBall.GetComponent<Rigidbody2D>().AddForce(-transform.right * base._cannonFireStrength);
         }
 
         StartCoroutine(ShakeCamera(1f, 0.2f));
