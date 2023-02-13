@@ -20,14 +20,18 @@ public class BoatController : MonoBehaviour
     }
 
     protected Rigidbody2D _rigidbody2d;
+
     private Animator _animator;
     private Slider _healthBar;
+    private Material _healthBarMaterial;
 
     private float _rotationDirection;
     private float _moveForwardCurrentForce;
 
     private float _smoothMovementVelocity;
     private float _movementInputSmoothVelocity;
+
+    private Coroutine _healthBarCoroutine;
 
 
     protected virtual void Awake()
@@ -36,6 +40,15 @@ public class BoatController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _uiManager = GameObject.Find("Manager").GetComponent<UIManager>();
         _healthBar = transform.GetChild(0).GetChild(0).gameObject.GetComponent<Slider>();
+
+        // Creates a material with default shader and applies to the health bar so its alpha channel can be manipulated later.
+        _healthBarMaterial = new Material(GetComponent<SpriteRenderer>().sharedMaterial.shader);
+        foreach (Image image in _healthBar.transform.GetComponentsInChildren<Image>())
+        {
+            image.material = _healthBarMaterial;
+        }
+
+        _healthBarCoroutine = StartCoroutine(FadeHealthBar());
         
         CurrentHealth = 100;
     }
@@ -76,10 +89,15 @@ public class BoatController : MonoBehaviour
     public virtual void TakeHit(int damage)
     {
         CurrentHealth -= damage;
+
         HealthHandler();
+
+        // Displays the boat's health bar and then hide it again.
+        StopCoroutine(_healthBarCoroutine);
+        _healthBarCoroutine = StartCoroutine(FadeHealthBar());
     }
 
-    // Atualiza os dados referentes à vida do barco.
+    // Updates the data related to boat's health points.
     private void HealthHandler()
     {
         if (CurrentHealth <= 0)
@@ -93,6 +111,39 @@ public class BoatController : MonoBehaviour
         }
 
         _animator.SetInteger("CurrentHealthAmount", CurrentHealth);
+    }
+
+    // Briefly displays the health bar and then fades it out.
+    private IEnumerator FadeHealthBar()
+    {
+        Color tempColor = Color.white;
+        tempColor.a = _healthBarMaterial.color.a;
+
+        // Fade in.
+        while (tempColor.a < 1)
+        {
+            tempColor.a += .1f;
+            _healthBarMaterial.color = tempColor;
+
+            yield return new WaitForSeconds(.02f);
+        }
+
+        tempColor.a = 1;
+        _healthBarMaterial.color = tempColor;
+        
+        yield return new WaitForSeconds(1f);
+
+        // Fade Out.
+        while (tempColor.a > 0f)
+        {
+            tempColor.a -= .02f;
+            _healthBarMaterial.color = tempColor;
+
+            yield return new WaitForSeconds(.01f);
+        }
+
+        tempColor.a = 0;
+        _healthBarMaterial.color = tempColor;
     }
 
 
