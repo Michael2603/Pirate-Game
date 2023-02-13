@@ -18,8 +18,12 @@ public class CannonBallController : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             other.gameObject.GetComponent<BoatController>().TakeHit(10);
+
+            // Instantiate particles separately and they play on awake, so the ball can be destroyed immediately,
+            Instantiate(transform.GetChild(1),transform.position, transform.rotation).gameObject.SetActive(true);            
         }
 
-        Destroy(this.gameObject);
+            Instantiate(transform.GetChild(0),transform.position, transform.rotation).gameObject.SetActive(true);
+            Destroy(this.gameObject);
     }
 }

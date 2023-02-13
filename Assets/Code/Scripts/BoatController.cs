@@ -6,13 +6,13 @@ using UnityEngine.UI;
 
 public class BoatController : MonoBehaviour
 {
-    public float ForwardMovementSpeed;
-    public float RotationSpeed;
     [HideInInspector] public int CurrentHealth;
     [HideInInspector] public UIManager _uiManager;
+    public float ForwardMovementSpeed;
+    public float RotationSpeed;
     public GameObject CannonBall;
+    
     public float CannonFireStrength;
-
     protected float _cannonFireStrength
     {
         get {return CannonFireStrength * 100; }
