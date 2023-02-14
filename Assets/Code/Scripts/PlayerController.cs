@@ -8,6 +8,8 @@ public class PlayerController : BoatController
 {
     private float _inputX;
     private float _inputY;
+    private int _lateralShotDirection = 1;
+
     [SerializeField] private CinemachineVirtualCamera _camera;
 
     void Update()
@@ -27,7 +29,7 @@ public class PlayerController : BoatController
 
 
     // Fires 3 bullets to the side of the boat in a random pattern.
-    public IEnumerator LateralShotPattern()
+    private IEnumerator LateralShotPattern(int direction)
     {
         List<int> usedPositions = new List<int>();
 
@@ -51,7 +53,13 @@ public class PlayerController : BoatController
             }
 
             // Combine the current boat rotation and more 7 degrees between each bullet.
-            Quaternion newRotation = Quaternion.Euler(transform.forward * 7 * -selectedPosition) * transform.rotation;
+            Quaternion newRotation = Quaternion.Euler(transform.forward * 7 * (-selectedPosition * direction)) * transform.rotation;
+            
+            // Converts the rotation of the bullet so it can moveto the left.
+            if (direction == -1)
+            {
+                newRotation *= Quaternion.Euler(transform.forward * 180 * direction);
+            }
             
             GameObject tempCannonBall = Instantiate(
                 base.CannonBall,
@@ -106,6 +114,19 @@ public class PlayerController : BoatController
     // Fires 3 cannonballs at the side of boat.
     private void OnLateralShot()
     {
-        StartCoroutine(LateralShotPattern());
+        StartCoroutine(LateralShotPattern(_lateralShotDirection));
+    }
+
+    // Forces the lateral shot to change its direction.
+    private void OnChangeLateralShotDirection()
+    {
+        if (_lateralShotDirection == 1)
+        {
+            _lateralShotDirection = -1;
+        }
+        else
+        {
+            _lateralShotDirection = 1;
+        }
     }
 }

@@ -62,6 +62,15 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Hold(duration=0.3,pressPoint=0.2)"",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ChangeLateralShotDirection"",
+                    ""type"": ""Button"",
+                    ""id"": ""c16a090e-b9f0-4b96-ad46-7661582a332b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(pressPoint=0.01)"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -284,6 +293,28 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Rotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""025ecaab-3192-4fa4-9687-94e4cff253af"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard Scheme"",
+                    ""action"": ""ChangeLateralShotDirection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""78268556-a53c-4cad-9ce7-7abbf5db305a"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad Scheme"",
+                    ""action"": ""ChangeLateralShotDirection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -319,6 +350,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_Movement_LateralShot = m_Movement.FindAction("LateralShot", throwIfNotFound: true);
         m_Movement_Move = m_Movement.FindAction("Move", throwIfNotFound: true);
         m_Movement_Rotate = m_Movement.FindAction("Rotate", throwIfNotFound: true);
+        m_Movement_ChangeLateralShotDirection = m_Movement.FindAction("ChangeLateralShotDirection", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -382,6 +414,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Movement_LateralShot;
     private readonly InputAction m_Movement_Move;
     private readonly InputAction m_Movement_Rotate;
+    private readonly InputAction m_Movement_ChangeLateralShotDirection;
     public struct MovementActions
     {
         private @InputActions m_Wrapper;
@@ -390,6 +423,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @LateralShot => m_Wrapper.m_Movement_LateralShot;
         public InputAction @Move => m_Wrapper.m_Movement_Move;
         public InputAction @Rotate => m_Wrapper.m_Movement_Rotate;
+        public InputAction @ChangeLateralShotDirection => m_Wrapper.m_Movement_ChangeLateralShotDirection;
         public InputActionMap Get() { return m_Wrapper.m_Movement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -411,6 +445,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Rotate.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnRotate;
                 @Rotate.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnRotate;
                 @Rotate.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnRotate;
+                @ChangeLateralShotDirection.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnChangeLateralShotDirection;
+                @ChangeLateralShotDirection.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnChangeLateralShotDirection;
+                @ChangeLateralShotDirection.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnChangeLateralShotDirection;
             }
             m_Wrapper.m_MovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -427,6 +464,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Rotate.started += instance.OnRotate;
                 @Rotate.performed += instance.OnRotate;
                 @Rotate.canceled += instance.OnRotate;
+                @ChangeLateralShotDirection.started += instance.OnChangeLateralShotDirection;
+                @ChangeLateralShotDirection.performed += instance.OnChangeLateralShotDirection;
+                @ChangeLateralShotDirection.canceled += instance.OnChangeLateralShotDirection;
             }
         }
     }
@@ -455,5 +495,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnLateralShot(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
+        void OnChangeLateralShotDirection(InputAction.CallbackContext context);
     }
 }

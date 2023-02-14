@@ -40,6 +40,15 @@
                     "processors": "",
                     "interactions": "Hold(duration=0.3,pressPoint=0.2)",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "ChangeLateralShotDirection",
+                    "type": "Button",
+                    "id": "c16a090e-b9f0-4b96-ad46-7661582a332b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(pressPoint=0.01)",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -262,6 +271,28 @@
                     "action": "Rotate",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "025ecaab-3192-4fa4-9687-94e4cff253af",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard Scheme",
+                    "action": "ChangeLateralShotDirection",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "78268556-a53c-4cad-9ce7-7abbf5db305a",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad Scheme",
+                    "action": "ChangeLateralShotDirection",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
