@@ -25,6 +25,49 @@ public class PlayerController : BoatController
         StartCoroutine(ShakeCamera(.7f, 0.5f));
     }
 
+
+    // Fires 3 bullets to the side of the boat in a random pattern.
+    public IEnumerator LateralShotPattern()
+    {
+        List<int> usedPositions = new List<int>();
+
+        for(int i = 0; i < 3; i++)
+        {
+            int selectedPosition = Random.Range(-1,2);
+
+            // Select a random position without repeat.
+            while (true)
+            {
+                if (!usedPositions.Contains(selectedPosition))
+                {
+                    usedPositions.Add(selectedPosition);
+                    break;
+                }
+                else
+                {
+                    selectedPosition = Random.Range(-1,2);
+                    print(selectedPosition);
+                }
+            }
+
+            // Combine the current boat rotation and more 7 degrees between each bullet.
+            Quaternion newRotation = Quaternion.Euler(transform.forward * 7 * -selectedPosition) * transform.rotation;
+            
+            GameObject tempCannonBall = Instantiate(
+                base.CannonBall,
+                transform.position + (transform.up * (selectedPosition / 9f)),
+                newRotation);
+
+            tempCannonBall.GetComponent<Rigidbody2D>().AddForce(-tempCannonBall.transform.right * base._cannonFireStrength);
+
+            // Randomize a small time gap between each shot and also shake the camera based on this time.
+            float timer = Random.Range(0.05f, 0.21f);
+
+            StartCoroutine(ShakeCamera(.8f, timer));
+            yield return new WaitForSeconds(timer);
+        }
+    }
+
     // Uses the cinemachine to shake the camera and add some intensity to the shots and damage taken.
     private IEnumerator ShakeCamera(float intensity, float time)
     {   
@@ -63,19 +106,6 @@ public class PlayerController : BoatController
     // Fires 3 cannonballs at the side of boat.
     private void OnLateralShot()
     {
-        int shotPosition = -1;
-
-        // Fires 3 bullets to the side of the boat.
-        for (int i = 0; i < 3; i++, shotPosition++)
-        {
-            GameObject tempCannonBall = Instantiate(
-                base.CannonBall,
-                transform.position + (transform.up * (shotPosition / 5f)),
-                transform.rotation);
-
-            tempCannonBall.GetComponent<Rigidbody2D>().AddForce(-transform.right * base._cannonFireStrength);
-        }
-
-        StartCoroutine(ShakeCamera(1f, 0.2f));
+        StartCoroutine(LateralShotPattern());
     }
 }
