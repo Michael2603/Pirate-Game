@@ -103,7 +103,13 @@ public class BoatController : MonoBehaviour
         if (CurrentHealth <= 0)
         {
             CurrentHealth = 0;
+
+            // Disable the interactible components.
             _healthBar.transform.parent.gameObject.SetActive(false);
+            _rigidbody2d.constraints = RigidbodyConstraints2D.FreezeAll;
+            _rigidbody2d.isKinematic = true;
+            GetComponent<Collider2D>().enabled = false;
+            GetComponent<BoatController>().enabled = false;
         }
         else
         {
