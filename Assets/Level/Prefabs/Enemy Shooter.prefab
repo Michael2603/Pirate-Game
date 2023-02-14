@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 220176917131799902}
   - component: {fileID: 220176917131799901}
   - component: {fileID: 220176917131799900}
-  - component: {fileID: 990351967325992993}
+  - component: {fileID: 1509241301068093752}
   - component: {fileID: 1682290446}
   m_Layer: 6
-  m_Name: Enemy Boat
+  m_Name: Enemy Shooter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -137,7 +137,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.66, y: 1.13}
   m_EdgeRadius: 0
---- !u!114 &990351967325992993
+--- !u!114 &1509241301068093752
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 220176917131799905}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50f17a930aff4b94a97df828e088da00, type: 3}
+  m_Script: {fileID: 11500000, guid: e55983114152fc5459637e6b17e8b156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentHealth: 0

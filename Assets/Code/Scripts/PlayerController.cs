@@ -48,7 +48,6 @@ public class PlayerController : BoatController
                 else
                 {
                     selectedPosition = Random.Range(-1,2);
-                    print(selectedPosition);
                 }
             }
 

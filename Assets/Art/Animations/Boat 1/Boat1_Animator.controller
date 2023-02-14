@@ -8,9 +8,6 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 3
-    m_ConditionEvent: CurrentHealthAmount
-    m_EventTreshold: 0
   - m_ConditionMode: 4
     m_ConditionEvent: CurrentHealthAmount
     m_EventTreshold: 33
@@ -245,9 +242,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 4
     m_ConditionEvent: CurrentHealthAmount
     m_EventTreshold: 66
-  - m_ConditionMode: 3
-    m_ConditionEvent: CurrentHealthAmount
-    m_EventTreshold: 33
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -275147986154308757}
   m_Solo: 0

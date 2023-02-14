@@ -147,6 +147,7 @@ public class BoatController : MonoBehaviour
     }
 
     // Used by the animations behaviour. Makes the boat emmmit more flames particles until its last visual state.
+    [System.Obsolete]
     public void EmmitParticles()
     {
         if (transform.GetChild(1).GetComponent<ParticleSystem>().emissionRate >= 2)
