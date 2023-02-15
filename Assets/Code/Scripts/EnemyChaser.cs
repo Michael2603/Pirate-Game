@@ -21,10 +21,25 @@ public class EnemyChaser : BoatController
 
     private void Update()
     {
+        // Looks for the player and if found, rotate the boat to face him.
         RaycastHit2D raycast = Physics2D.CircleCast(transform.position, 5, transform.forward, .1f, 1 << LayerMask.NameToLayer("Player"));
         if (raycast)
         {
+            Vector3 posRelativeToPlayer = transform.InverseTransformPoint(raycast.transform.position);
+            float angleRelativeToPlayer = Mathf.Atan2(posRelativeToPlayer.y, posRelativeToPlayer.x) * Mathf.Rad2Deg;
             
+            if (Mathf.Abs(angleRelativeToPlayer) < 85)
+            {
+                base.Rotate(1);
+            }
+            else if (Mathf.Abs(angleRelativeToPlayer) > 95)
+            {
+                base.Rotate(-1);
+            }
+            else
+            {
+                base.Rotate(0);
+            }
         }
     }
 
@@ -43,11 +58,6 @@ public class EnemyChaser : BoatController
     {
         base.TakeHit(damage);
         base._uiManager.UpdateScore(9);
-    }
-
-    private void Attack()
-    {
-
     }
 
     // Explode when collides with anoter boat.

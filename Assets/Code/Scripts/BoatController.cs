@@ -20,17 +20,15 @@ public class BoatController : MonoBehaviour
     }
 
     protected Rigidbody2D _rigidbody2d;
+    protected bool _canShoot = true;
 
     private Animator _animator;
     private Slider _healthBar;
     private Material _healthBarMaterial;
-
     private float _rotationDirection;
     private float _moveForwardCurrentForce;
-
     private float _smoothMovementVelocity;
     private float _movementInputSmoothVelocity;
-
     private Coroutine _healthBarCoroutine;
 
 
