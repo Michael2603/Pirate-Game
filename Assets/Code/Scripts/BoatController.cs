@@ -8,10 +8,9 @@ public class BoatController : MonoBehaviour
 {
     [HideInInspector] public int CurrentHealth;
     [HideInInspector] public UIManager _uiManager;
-    public float ForwardMovementSpeed;
-    public float RotationSpeed;
+
     public GameObject CannonBall;
-    
+
     public float CannonFireStrength;
     protected float _cannonFireStrength
     {
@@ -19,18 +18,19 @@ public class BoatController : MonoBehaviour
         set {CannonFireStrength = value; }
     }
 
-    protected Rigidbody2D _rigidbody2d;
-    protected bool _canShoot = true;
-
     private Animator _animator;
     private Slider _healthBar;
     private Material _healthBarMaterial;
+    private float _forwardMovementSpeed = 3;
     private float _rotationDirection;
     private float _moveForwardCurrentForce;
     private float _smoothMovementVelocity;
     private float _movementInputSmoothVelocity;
     private Coroutine _healthBarCoroutine;
 
+    protected Rigidbody2D _rigidbody2d;
+    protected bool _canShoot = true;
+    
 
     protected virtual void Awake()
     {
@@ -72,14 +72,14 @@ public class BoatController : MonoBehaviour
                 1f);
         }
 
-        _rigidbody2d.velocity = -transform.up * _smoothMovementVelocity * ForwardMovementSpeed;
+        _rigidbody2d.velocity = -transform.up * _smoothMovementVelocity * _forwardMovementSpeed;
 
 
         // Rotates the ship based on its current rotation and the input.
         if (_rotationDirection != 0)
         {
             float angle = _rotationDirection * Mathf.Rad2Deg;
-            transform.localRotation *= Quaternion.Euler(Vector3.forward * angle * Time.deltaTime * RotationSpeed);
+            transform.localRotation *= Quaternion.Euler(Vector3.forward * angle * Time.deltaTime);
         }
     }
 

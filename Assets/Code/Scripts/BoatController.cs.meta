@@ -3,7 +3,9 @@ guid: eda5057db04dad94c8334852d57e50fd
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _uiManager: {instanceID: 0}
+  - CannonBall: {fileID: 4288485827351727061, guid: ed2c67e3316b0f0449d78ea8090b8899, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

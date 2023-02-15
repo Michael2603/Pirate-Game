@@ -31,14 +31,17 @@ public class EnemyChaser : BoatController
             if (Mathf.Abs(angleRelativeToPlayer) < 85)
             {
                 base.Rotate(1);
+                base.MoveForward(0);
             }
             else if (Mathf.Abs(angleRelativeToPlayer) > 95)
             {
                 base.Rotate(-1);
+                base.MoveForward(0);
             }
             else
             {
                 base.Rotate(0);
+                base.MoveForward(0.3f);
             }
         }
     }
@@ -46,7 +49,7 @@ public class EnemyChaser : BoatController
     void OnDrawGizmos()
     {
         // Sight area.
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.gray;
         Gizmos.DrawWireSphere(transform.position, 5f);
 
         // Explosion area.

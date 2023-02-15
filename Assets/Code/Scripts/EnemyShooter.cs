@@ -12,22 +12,47 @@ public class EnemyShooter : BoatController
 
     private void Update()
     {
+        if (base._canShoot && CheckLaterals() != 0)
+        {
+            StartCoroutine(LateralShotPattern(CheckLaterals()));
+        }
+    }
+
+    // Scans both sides and returns which one has an enemy within shooting range (45 degrees up or down on the sides).
+    private int CheckLaterals()
+    {
         RaycastHit2D raycast = Physics2D.CircleCast(transform.position, 5, transform.forward, .1f, 1 << LayerMask.NameToLayer("Player"));
-        if (raycast && base._canShoot)
+        int direction = 0;
+
+        if (raycast)
         {
             Vector3 posRelativeToPlayer = transform.InverseTransformPoint(raycast.transform.position);
             float angleRelativeToPlayer = Mathf.Atan2(posRelativeToPlayer.y, posRelativeToPlayer.x) * Mathf.Rad2Deg;
+
+            // The player is within range if its position is 22.5 degrees up or down counting from the point perpendicular point to the boat.
             if (Mathf.Abs(angleRelativeToPlayer) - 22.5f < 22.5f)
             {
-                base._canShoot = false;
-                StartCoroutine(LateralShotPattern(-1));
+                // Right
+                direction = -1;
+            }
+            else if (Mathf.Abs(angleRelativeToPlayer) - 22.5f > 112.5f)
+            {
+                // Left
+                direction = 1;
+            }
+            else
+            {
+                direction = 0;
             }
         }
+
+        return direction;
     }
 
     // Fires 3 bullets to the side of the boat in a random pattern.
     private IEnumerator LateralShotPattern(int direction)
     {
+        base._canShoot = false;
         List<int> usedPositions = new List<int>();
 
         for(int i = 0; i < 3; i++)
@@ -51,7 +76,7 @@ public class EnemyShooter : BoatController
             // Combine the current boat rotation and more 7 degrees between each bullet.
             Quaternion newRotation = Quaternion.Euler(transform.forward * 7 * (-selectedPosition * direction)) * transform.rotation;
             
-            // Converts the rotation of the bullet so it can moveto the left.
+            // Converts the rotation of the bullet so it can move to the left.
             if (direction == -1)
             {
                 newRotation *= Quaternion.Euler(transform.forward * 180 * direction);
@@ -62,7 +87,7 @@ public class EnemyShooter : BoatController
                 transform.position + (transform.up * (selectedPosition / 9f)),
                 newRotation);
             
-            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), tempCannonBall.GetComponent<Collider2D>());
+            Physics2D.IgnoreCollision(tempCannonBall.GetComponent<Collider2D>(), this.gameObject.GetComponent<Collider2D>());
             tempCannonBall.GetComponent<Rigidbody2D>().AddForce(-tempCannonBall.transform.right * base._cannonFireStrength);
 
             // Randomize a small time gap between each shot.
@@ -74,7 +99,7 @@ public class EnemyShooter : BoatController
 
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.gray;
+        Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, 5f);
     }
 
