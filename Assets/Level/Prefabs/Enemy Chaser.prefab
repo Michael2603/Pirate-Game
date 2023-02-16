@@ -9891,8 +9891,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentHealth: 0
   _uiManager: {fileID: 0}
-  ForwardMovementSpeed: 3
-  RotationSpeed: 1
   CannonBall: {fileID: 4288485827351727061, guid: ed2c67e3316b0f0449d78ea8090b8899, type: 3}
   CannonFireStrength: 3
   ExplosionRange: 1.5

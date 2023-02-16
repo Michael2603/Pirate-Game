@@ -127,5 +127,19 @@ public class PlayerController : BoatController
         {
             _lateralShotDirection = 1;
         }
+
+        // Emits arrows showing the current active side, also modifies particle attributes so arrows are facing the right direction.
+        ParticleSystem indicatorParticles = transform.GetChild(2).GetComponent<ParticleSystem>();
+        var particlesShape = indicatorParticles.shape;
+        var particlesRenderer = indicatorParticles.GetComponent<ParticleSystemRenderer>();
+        var particlesVelocity = indicatorParticles.velocityOverLifetime;
+        var particlesRotation = indicatorParticles.main;
+
+        particlesShape.scale = new Vector3(-_lateralShotDirection,1,1);
+        particlesRenderer.flip = new Vector3(_lateralShotDirection,1,1);
+        particlesVelocity.xMultiplier = -_lateralShotDirection * 0.3f;
+        particlesRotation.startRotation = -transform.localEulerAngles.z * Mathf.Deg2Rad;
+
+        indicatorParticles.Emit(1);
     }
 }
