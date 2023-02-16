@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class BoatController : MonoBehaviour
 {
     [HideInInspector] public int CurrentHealth;
-    [HideInInspector] public UIManager _uiManager;
+    [HideInInspector] public UIManager UIManager;
+    public float ReloadAmmoTimer;
 
     public GameObject CannonBall;
 
@@ -30,13 +31,15 @@ public class BoatController : MonoBehaviour
 
     protected Rigidbody2D _rigidbody2d;
     protected bool _canShoot = true;
+    public int _currentAmmunition;
+    protected bool _isReloading;
     
 
     protected virtual void Awake()
     {
         _rigidbody2d = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
-        _uiManager = GameObject.Find("Manager").GetComponent<UIManager>();
+        UIManager = GameObject.Find("Manager").GetComponent<UIManager>();
         _healthBar = transform.GetChild(0).GetChild(0).gameObject.GetComponent<Slider>();
 
         // Creates a material with default shader and applies to the health bar so its alpha channel can be manipulated later.
@@ -80,6 +83,30 @@ public class BoatController : MonoBehaviour
         {
             float angle = _rotationDirection * Mathf.Rad2Deg;
             transform.localRotation *= Quaternion.Euler(Vector3.forward * angle * Time.deltaTime);
+        }
+    }
+
+    // Adds 1 to the current ammo after a short time.
+    protected IEnumerator ReloadAmmunition()
+    {
+        _isReloading = true;
+
+        yield return new WaitForSeconds(ReloadAmmoTimer);
+
+        _currentAmmunition++;
+
+        if (_canShoot == false)
+        {
+            _canShoot = true;
+        }
+
+        if (_currentAmmunition < 3)
+        {
+            StartCoroutine(ReloadAmmunition());
+        }
+        else
+        {
+            _isReloading = false;
         }
     }
 
@@ -152,7 +179,7 @@ public class BoatController : MonoBehaviour
 
     // Used by the animations behaviour. Makes the boat emmmit more flames particles until its last visual state.
     [System.Obsolete]
-    public void EmmitParticles()
+    public void EmmitFlamesParticles()
     {
         if (transform.GetChild(1).GetComponent<ParticleSystem>().emissionRate >= 2)
         {

@@ -163,31 +163,9 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "negative",
-                    "id": "aa6bb471-4da4-4bcc-99fe-31ef9463bb54",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard Scheme",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "negative",
-                    "id": "4055395b-fd83-486c-924f-3f57fb31ab32",
-                    "path": "<Keyboard>/downArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard Scheme",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "negative",
-                    "id": "c5658509-5197-4d50-ae02-155034021dbb",
-                    "path": "<Gamepad>/leftStick/down",
+                    "name": "positive",
+                    "id": "365ccdf2-ea53-49cb-89cd-362d9d22178f",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad Scheme",

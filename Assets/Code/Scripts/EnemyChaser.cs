@@ -60,7 +60,7 @@ public class EnemyChaser : BoatController
     public override void TakeHit(int damage)
     {
         base.TakeHit(damage);
-        base._uiManager.UpdateScore(9);
+        base.UIManager.UpdateScore(9);
     }
 
     // Explode when collides with anoter boat.

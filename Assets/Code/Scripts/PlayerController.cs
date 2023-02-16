@@ -17,12 +17,17 @@ public class PlayerController : BoatController
         base.Movement();
         base.Rotate(_inputX);
         base.MoveForward(_inputY);
+
+        if (base._currentAmmunition < 3 && !base._isReloading)
+        {
+            base.StartCoroutine(base.ReloadAmmunition());
+        }
     }
 
     public override void TakeHit(int damage)
     {
         base.TakeHit(damage);
-        base._uiManager.UpdateScore(-12);
+        base.UIManager.UpdateScore(-12);
 
         StartCoroutine(ShakeCamera(.7f, 0.5f));
     }
@@ -97,9 +102,17 @@ public class PlayerController : BoatController
         _inputX = -value.Get<float>();
     }
 
-    // Fires cannonballs forwards.
+    // Fires one cannonball forwards.
     private void OnFrontalShot()
     {
+        if (base._canShoot == false || base._currentAmmunition == 0)
+        {
+            return;
+        }
+
+        base._canShoot = false;
+        base._currentAmmunition--;
+
         GameObject tempCannonBall = Instantiate(
             base.CannonBall,
             transform.localPosition,
@@ -107,13 +120,18 @@ public class PlayerController : BoatController
 
         tempCannonBall.GetComponent<Rigidbody2D>().AddForce(-transform.up * base._cannonFireStrength);
 
+
         StartCoroutine(ShakeCamera(0.8f, 0.1f));
     }
 
-    // Fires 3 cannonballs at the side of boat.
+    // Fires three cannonballs at the side of boat.
     private void OnLateralShot()
     {
-        StartCoroutine(LateralShotPattern(_lateralShotDirection));
+        if (base._canShoot == true && base._currentAmmunition >= 3)
+        {
+            _currentAmmunition = 0;
+            StartCoroutine(LateralShotPattern(_lateralShotDirection));
+        }
     }
 
     // Forces the lateral shot to change its direction.
