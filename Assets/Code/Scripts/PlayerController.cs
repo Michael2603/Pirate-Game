@@ -27,6 +27,10 @@ public class PlayerController : BoatController
     public override void TakeHit(int damage)
     {
         base.TakeHit(damage);
+        if (CurrentHealth <= 0)
+        {
+            base.GameplayManager.EndGame();
+        }
         base.GameplayManager.UpdateScore(-12);
 
         StartCoroutine(ShakeCamera(.7f, 0.5f));

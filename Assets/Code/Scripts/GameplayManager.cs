@@ -22,7 +22,7 @@ public class GameplayManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    // Keeps active so the objects in game can use its data.
+    // Keeps this manager active so the objects in game can use its data.
     private void OnLevelWasLoaded()
     {
         if (SceneManager.GetActiveScene().name == "GameScene")
@@ -44,8 +44,15 @@ public class GameplayManager : MonoBehaviour
         _uiManager.UpdateUIScore(_scoreAmount);
     }
 
+    // Calls the UI to update the HUD.
     public void UpdatePlayerCurrentAmmo(int ammoAmount)
     {
         _uiManager.UpdateAmmoIcons(ammoAmount);
+    }
+
+    // Pauses the game and updates the UI.
+    public void EndGame()
+    {
+        _uiManager.ShowEndGameMenu(_scoreAmount);
     }
 }

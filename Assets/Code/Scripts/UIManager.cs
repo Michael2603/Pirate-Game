@@ -3,11 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text _scoreText;
+    [SerializeField] private TMP_Text _endGameScoreText;
     [SerializeField] private List<Image> cannonBallsIcons = new List<Image>();
+
+    private GameplayManager _gameplayManager;
+
+    public GameObject EndGameUI;
+    public GameObject GameHUD;
+
+    private void Awake()
+    {
+        _gameplayManager = GameObject.Find("GameplayManager").GetComponent<GameplayManager>();
+    }
 
     // Updates the UI text to match the current score.
     public void UpdateUIScore(int amount)
@@ -35,5 +47,21 @@ public class UIManager : MonoBehaviour
 
             icon.color = tempColor;
         }
+    }
+
+    // Hides the HUD and displays the end game screen.
+    public void ShowEndGameMenu(int finalScore)
+    {
+        GameHUD.SetActive(false);
+        EndGameUI.SetActive(true);
+
+        _endGameScoreText.text = "Pontuação final:" + finalScore;
+    }
+
+    // Used for the endgame button.
+    public void ReturnToMenu()
+    {
+        Destroy(_gameplayManager.gameObject);
+        SceneManager.LoadScene(0);
     }
 }
