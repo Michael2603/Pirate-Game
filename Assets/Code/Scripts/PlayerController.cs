@@ -70,6 +70,7 @@ public class PlayerController : BoatController
                 transform.position + (transform.up * (selectedPosition / 9f)),
                 newRotation);
 
+            Physics2D.IgnoreCollision(tempCannonBall.GetComponent<Collider2D>(), GetComponent<Collider2D>());
             tempCannonBall.GetComponent<Rigidbody2D>().AddForce(-tempCannonBall.transform.right * base._cannonFireStrength);
 
             // Randomize a small time gap between each shot and also shake the camera based on this time.
@@ -119,6 +120,7 @@ public class PlayerController : BoatController
             transform.localPosition,
             transform.rotation);
 
+        Physics2D.IgnoreCollision(tempCannonBall.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         tempCannonBall.GetComponent<Rigidbody2D>().AddForce(-transform.up * base._cannonFireStrength);
 
 

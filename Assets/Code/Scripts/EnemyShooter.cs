@@ -16,6 +16,15 @@ public class EnemyShooter : BoatController
         {
             StartCoroutine(LateralShotPattern(CheckLaterals()));
         }
+
+        if (base._currentAmmunition < 3 && !base._isReloading)
+        {
+            base.StartCoroutine(ReloadAmmunition());
+        }
+        else if (base._currentAmmunition >= 3)
+        {
+            base._canShoot = true;
+        }
     }
 
     // Scans both sides and returns which one has an enemy within shooting range (45 degrees up or down on the sides).
@@ -53,6 +62,8 @@ public class EnemyShooter : BoatController
     private IEnumerator LateralShotPattern(int direction)
     {
         base._canShoot = false;
+        base._currentAmmunition = 0;
+        
         List<int> usedPositions = new List<int>();
 
         for(int i = 0; i < 3; i++)
@@ -87,7 +98,7 @@ public class EnemyShooter : BoatController
                 transform.position + (transform.up * (selectedPosition / 9f)),
                 newRotation);
             
-            Physics2D.IgnoreCollision(tempCannonBall.GetComponent<Collider2D>(), this.gameObject.GetComponent<Collider2D>());
+            Physics2D.IgnoreCollision(tempCannonBall.GetComponent<Collider2D>(), GetComponent<Collider2D>());
             tempCannonBall.GetComponent<Rigidbody2D>().AddForce(-tempCannonBall.transform.right * base._cannonFireStrength);
 
             // Randomize a small time gap between each shot.

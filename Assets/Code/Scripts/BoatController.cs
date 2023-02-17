@@ -96,11 +96,11 @@ public class BoatController : MonoBehaviour
         if (this.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             UIManager.UpdateAmmoIcons(_currentAmmunition);
-        }
-        
-        if (_canShoot == false)
-        {
-            _canShoot = true;
+                    
+            if (_canShoot == false)
+            {
+                _canShoot = true;
+            }
         }
 
         if (_currentAmmunition < 3)

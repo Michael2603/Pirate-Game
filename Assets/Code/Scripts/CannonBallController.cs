@@ -15,7 +15,7 @@ public class CannonBallController : MonoBehaviour
     // Destroys itself and damages a boat if hit it.
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy") || other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             other.gameObject.GetComponent<BoatController>().TakeHit(10);
 
