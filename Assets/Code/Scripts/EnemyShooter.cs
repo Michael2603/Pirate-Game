@@ -117,6 +117,6 @@ public class EnemyShooter : BoatController
     public override void TakeHit(int damage)
     {
         base.TakeHit(damage);
-        base.UIManager.UpdateScore(12);
+        base.GameplayManager.UpdateScore(12);
     }
 }

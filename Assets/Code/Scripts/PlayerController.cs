@@ -27,7 +27,7 @@ public class PlayerController : BoatController
     public override void TakeHit(int damage)
     {
         base.TakeHit(damage);
-        base.UIManager.UpdateScore(-12);
+        base.GameplayManager.UpdateScore(-12);
 
         StartCoroutine(ShakeCamera(.7f, 0.5f));
     }
@@ -113,7 +113,7 @@ public class PlayerController : BoatController
 
         base._canShoot = false;
         base._currentAmmunition--;
-        base.UIManager.UpdateAmmoIcons(_currentAmmunition);
+        base.GameplayManager.UpdatePlayerCurrentAmmo(_currentAmmunition);
 
         GameObject tempCannonBall = Instantiate(
             base.CannonBall,
@@ -133,7 +133,7 @@ public class PlayerController : BoatController
         if (base._canShoot == true && base._currentAmmunition >= 3)
         {
             _currentAmmunition = 0;
-            base.UIManager.UpdateAmmoIcons(_currentAmmunition);
+            base.GameplayManager.UpdatePlayerCurrentAmmo(_currentAmmunition);
 
             StartCoroutine(LateralShotPattern(_lateralShotDirection));
         }

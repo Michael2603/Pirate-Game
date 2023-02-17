@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class BoatController : MonoBehaviour
 {
     [HideInInspector] public int CurrentHealth;
-    [HideInInspector] public UIManager UIManager;
+    [HideInInspector] public GameplayManager GameplayManager;
     public float ReloadAmmoTimer;
     public GameObject CannonBall;
 
@@ -38,7 +38,7 @@ public class BoatController : MonoBehaviour
     {
         _rigidbody2d = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
-        UIManager = GameObject.Find("Manager").GetComponent<UIManager>();
+        GameplayManager = GameObject.Find("GameplayManager").GetComponent<GameplayManager>();
         _healthBar = transform.GetChild(0).GetChild(0).gameObject.GetComponent<Slider>();
 
         // Creates a material with default shader and applies to the health bar so its alpha channel can be manipulated later.
@@ -95,7 +95,7 @@ public class BoatController : MonoBehaviour
         _currentAmmunition++;
         if (this.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            UIManager.UpdateAmmoIcons(_currentAmmunition);
+            GameplayManager.UpdatePlayerCurrentAmmo(_currentAmmunition);
                     
             if (_canShoot == false)
             {

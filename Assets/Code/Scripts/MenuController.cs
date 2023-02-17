@@ -16,28 +16,23 @@ public class MenuController : MonoBehaviour
     public Slider DifficultySlider;
     public TMP_Text DifficultyValueText;
 
-    //Buttons
-        public void LoadGame()
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        }
 
-        public void EnterConfigurations()
-        {
-            MainMenuPanel.SetActive(false);
-            ConfigurationsPanel.SetActive(true);
-        }
+    public void LoadGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
 
-        public void ReturnFromConfigurations()
-        {
-            ConfigurationsPanel.SetActive(false);
-            MainMenuPanel.SetActive(true);
-        }
-        
-        public void Exit()
-        {
-            Application.Quit();
-        }
+    public void EnterConfigurations()
+    {
+        MainMenuPanel.SetActive(false);
+        ConfigurationsPanel.SetActive(true);
+    }
+
+    public void ReturnFromConfigurations()
+    {
+        ConfigurationsPanel.SetActive(false);
+        MainMenuPanel.SetActive(true);
+    }
 
     public void AdjustGameDuration()
     {
