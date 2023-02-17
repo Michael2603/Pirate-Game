@@ -20,7 +20,7 @@ public class PlayerController : BoatController
 
         if (base._currentAmmunition < 3 && !base._isReloading)
         {
-            base.StartCoroutine(base.ReloadAmmunition());
+            base.StartCoroutine(ReloadAmmunition());
         }
     }
 
@@ -112,6 +112,7 @@ public class PlayerController : BoatController
 
         base._canShoot = false;
         base._currentAmmunition--;
+        base.UIManager.UpdateAmmoIcons(_currentAmmunition);
 
         GameObject tempCannonBall = Instantiate(
             base.CannonBall,
@@ -130,6 +131,8 @@ public class PlayerController : BoatController
         if (base._canShoot == true && base._currentAmmunition >= 3)
         {
             _currentAmmunition = 0;
+            base.UIManager.UpdateAmmoIcons(_currentAmmunition);
+
             StartCoroutine(LateralShotPattern(_lateralShotDirection));
         }
     }

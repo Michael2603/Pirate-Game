@@ -9,7 +9,6 @@ public class BoatController : MonoBehaviour
     [HideInInspector] public int CurrentHealth;
     [HideInInspector] public UIManager UIManager;
     public float ReloadAmmoTimer;
-
     public GameObject CannonBall;
 
     public float CannonFireStrength;
@@ -31,7 +30,7 @@ public class BoatController : MonoBehaviour
 
     protected Rigidbody2D _rigidbody2d;
     protected bool _canShoot = true;
-    public int _currentAmmunition;
+    protected int _currentAmmunition;
     protected bool _isReloading;
     
 
@@ -87,14 +86,18 @@ public class BoatController : MonoBehaviour
     }
 
     // Adds 1 to the current ammo after a short time.
-    protected IEnumerator ReloadAmmunition()
+    protected virtual IEnumerator ReloadAmmunition()
     {
         _isReloading = true;
 
         yield return new WaitForSeconds(ReloadAmmoTimer);
 
         _currentAmmunition++;
-
+        if (this.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            UIManager.UpdateAmmoIcons(_currentAmmunition);
+        }
+        
         if (_canShoot == false)
         {
             _canShoot = true;
@@ -108,6 +111,7 @@ public class BoatController : MonoBehaviour
         {
             _isReloading = false;
         }
+
     }
 
     // Damages the player and update its health.
