@@ -15,6 +15,7 @@ public class GameplayManager : MonoBehaviour
     {
         // Changes the Seed of Random function to improve unpredictability.
         Random.InitState(System.DateTime.Now.Second);
+        Time.timeScale = 1;
 
         GameDurationInSecounds = 180;
         EnemySpawnInterval = 15;
@@ -54,5 +55,7 @@ public class GameplayManager : MonoBehaviour
     public void EndGame()
     {
         _uiManager.ShowEndGameMenu(_scoreAmount);
+        Time.timeScale = 0;
+
     }
 }
