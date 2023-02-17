@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class BoatController : MonoBehaviour
 {
     [HideInInspector] public int CurrentHealth;
-    [HideInInspector] public GameplayManager GameplayManager;
+     public GameplayManager GameplayManager;
     public float ReloadAmmoTimer;
     public GameObject CannonBall;
 

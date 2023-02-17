@@ -9,12 +9,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text _scoreText;
     [SerializeField] private List<Image> cannonBallsIcons = new List<Image>();
 
-    // Changes the total score and updates the UI to match the current score.
+    // Updates the UI text to match the current score.
     public void UpdateUIScore(int amount)
     {
         _scoreText.SetText("Pontuação: " + amount);
     }
 
+    // Changes the transparency of cannonballs in the UI to show the player their current amount of ammo.
     public void UpdateAmmoIcons(int currentAmmo)
     {
         int index = 0;

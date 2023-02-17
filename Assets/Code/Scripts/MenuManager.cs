@@ -5,8 +5,10 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
-public class MenuController : MonoBehaviour
+public class MenuManager : MonoBehaviour
 {
+    public GameplayManager GameplayManager;
+    
     public GameObject MainMenuPanel;
     public GameObject ConfigurationsPanel;
 
@@ -36,15 +38,17 @@ public class MenuController : MonoBehaviour
 
     public void AdjustGameDuration()
     {
-        int durationInMinutes = (int)Mathf.Round(GameDurationSlider.value) / 60;
+        int durationInMinutes = (int)Mathf.Round(GameDurationSlider.value)/ 60;
+        
+        GameplayManager.GameDurationInSecounds = durationInMinutes * 60;
 
         GameDurationValueText.text = durationInMinutes + " Minutos";
     }
 
     public void AdjustDifficulty()
     {
-        int difficultyInSecounds = (int)Mathf.Round(DifficultySlider.value);
+        GameplayManager.EnemySpawnInterval = (int)Mathf.Round(DifficultySlider.value);
 
-        DifficultyValueText.text = difficultyInSecounds + " Segundos";
+        DifficultyValueText.text = (int)Mathf.Round(DifficultySlider.value) + " Segundos";
     }
 }
