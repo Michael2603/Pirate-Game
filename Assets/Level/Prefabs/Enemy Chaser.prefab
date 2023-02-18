@@ -9769,7 +9769,7 @@ Transform:
   m_GameObject: {fileID: 6419613262369378425}
   m_LocalRotation: {x: 0, y: 0, z: 0.68011975, w: 0.73310107}
   m_LocalPosition: {x: -4.18, y: -6.41, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4490070085593569282}
@@ -9890,7 +9890,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentHealth: 0
-  _uiManager: {fileID: 0}
+  GameplayManager: {fileID: 0}
+  ReloadAmmoTimer: 0
   CannonBall: {fileID: 4288485827351727061, guid: ed2c67e3316b0f0449d78ea8090b8899, type: 3}
   CannonFireStrength: 3
   ExplosionRange: 1.5
