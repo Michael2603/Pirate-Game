@@ -7,15 +7,15 @@ public class EnemyShooter : BoatController
     private void FixedUpdate()
     {
         Movement();
-
     }
 
     private void Update()
     {
-        if (base._canShoot && CheckLaterals() != 0)
-        {
-            StartCoroutine(LateralShotPattern(CheckLaterals()));
-        }
+        int i = AimOnEnemy();
+        // if (base._canShoot && AimOnEnemy() != 0)
+        // {
+        //     StartCoroutine(LateralShotPattern(AimOnEnemy()));
+        // }
 
         if (base._currentAmmunition < 3 && !base._isReloading)
         {
@@ -27,8 +27,9 @@ public class EnemyShooter : BoatController
         }
     }
 
+
     // Scans both sides and returns which one has an enemy within shooting range (45 degrees up or down on the sides).
-    private int CheckLaterals()
+    private int AimOnEnemy()
     {
         RaycastHit2D raycast = Physics2D.CircleCast(transform.position, 5, transform.forward, .1f, 1 << LayerMask.NameToLayer("Player"));
         int direction = 0;
@@ -37,6 +38,22 @@ public class EnemyShooter : BoatController
         {
             Vector3 posRelativeToPlayer = transform.InverseTransformPoint(raycast.transform.position);
             float angleRelativeToPlayer = Mathf.Atan2(posRelativeToPlayer.y, posRelativeToPlayer.x) * Mathf.Rad2Deg;
+            
+            if ( (angleRelativeToPlayer > 90 && angleRelativeToPlayer < 175) ||
+                (angleRelativeToPlayer < -5 && angleRelativeToPlayer > -90))
+            {
+                base.Rotate(-.5f);
+            }
+            else if ( (angleRelativeToPlayer > 5 && angleRelativeToPlayer < 90) ||
+                (angleRelativeToPlayer > -175 && angleRelativeToPlayer < -90))
+            {
+                base.Rotate(.5f);
+            }
+            else
+            {
+                base.Rotate(0);
+            }
+
 
             // The player is within range if its position is 22.5 degrees up or down counting from the point perpendicular point to the boat.
             if (Mathf.Abs(angleRelativeToPlayer) - 22.5f < 22.5f)
