@@ -65,6 +65,21 @@ public class EnemyShooter : BoatController
         RaycastHit2D outOfAttackRaycast = Physics2D.CircleCast(transform.position, 8, transform.forward, .1f, 1 << LayerMask.NameToLayer("Player"));
         RaycastHit2D inAttackRangeRaycast = Physics2D.CircleCast(transform.position, 5, transform.forward, .1f, 1 << LayerMask.NameToLayer("Player"));
         
+        // If the enemy is within sight range, only chase him if this boat has direct sight to him.
+        if (outOfAttackRaycast)
+        {
+            RaycastHit2D visionObstructed = Physics2D.Linecast(
+                transform.position,
+                outOfAttackRaycast.collider.transform.position,
+                1 << LayerMask.NameToLayer("Island"));
+
+            if (visionObstructed)
+            {
+                return false;
+            }
+        }
+        
+        // Aim and attack the enemy.
         if (inAttackRangeRaycast)
         {
             // Constantly rotates the boat to attack the enemy and if has enough ammunition, shoot.
@@ -78,6 +93,7 @@ public class EnemyShooter : BoatController
 
             return true;
         }
+        // Persues the enemy until he enters the attack range
         else if (outOfAttackRaycast && !inAttackRangeRaycast)
         {
             _isEnemyInSight = true;
