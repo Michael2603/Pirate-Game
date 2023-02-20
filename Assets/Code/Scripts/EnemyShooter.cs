@@ -11,12 +11,16 @@ public class EnemyShooter : BoatController
 
     private void Update()
     {
-        int i = AimOnEnemy();
-        // if (base._canShoot && AimOnEnemy() != 0)
-        // {
-        //     StartCoroutine(LateralShotPattern(AimOnEnemy()));
-        // }
+        // Constantly rotates the boat to attack the enemy and if has enough ammunition, shoot.
+        if (AimOnEnemy() != 0)
+        {
+            if (base._canShoot)
+            {
+                StartCoroutine(LateralShotPattern(AimOnEnemy()));
+            }
+        }
 
+        // Constantly checks for ammunition.
         if (base._currentAmmunition < 3 && !base._isReloading)
         {
             base.StartCoroutine(ReloadAmmunition());
@@ -36,16 +40,17 @@ public class EnemyShooter : BoatController
 
         if (raycast)
         {
-            Vector3 posRelativeToPlayer = transform.InverseTransformPoint(raycast.transform.position);
-            float angleRelativeToPlayer = Mathf.Atan2(posRelativeToPlayer.y, posRelativeToPlayer.x) * Mathf.Rad2Deg;
+            // Gets position and angle in relation to the enemy and turns the boat so that it is in attack position in relation to the enemy.
+            Vector3 posRelativeToEnemy = transform.InverseTransformPoint(raycast.transform.position);
+            float angleRelativeToEnemy = Mathf.Atan2(posRelativeToEnemy.y, posRelativeToEnemy.x) * Mathf.Rad2Deg;
             
-            if ( (angleRelativeToPlayer > 90 && angleRelativeToPlayer < 175) ||
-                (angleRelativeToPlayer < -5 && angleRelativeToPlayer > -90))
+            if ( (angleRelativeToEnemy > 90 && angleRelativeToEnemy < 175) ||
+                (angleRelativeToEnemy < -5 && angleRelativeToEnemy > -90))
             {
                 base.Rotate(-.5f);
             }
-            else if ( (angleRelativeToPlayer > 5 && angleRelativeToPlayer < 90) ||
-                (angleRelativeToPlayer > -175 && angleRelativeToPlayer < -90))
+            else if ( (angleRelativeToEnemy > 5 && angleRelativeToEnemy < 90) ||
+                (angleRelativeToEnemy > -175 && angleRelativeToEnemy < -90))
             {
                 base.Rotate(.5f);
             }
@@ -56,19 +61,15 @@ public class EnemyShooter : BoatController
 
 
             // The player is within range if its position is 22.5 degrees up or down counting from the point perpendicular point to the boat.
-            if (Mathf.Abs(angleRelativeToPlayer) - 22.5f < 22.5f)
+            if (Mathf.Abs(angleRelativeToEnemy) - 22.5f < 22.5f)
             {
                 // Right
                 direction = -1;
             }
-            else if (Mathf.Abs(angleRelativeToPlayer) - 22.5f > 112.5f)
+            else if (Mathf.Abs(angleRelativeToEnemy) - 22.5f > 112.5f)
             {
                 // Left
                 direction = 1;
-            }
-            else
-            {
-                direction = 0;
             }
         }
 
