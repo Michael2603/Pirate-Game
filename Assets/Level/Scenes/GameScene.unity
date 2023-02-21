@@ -9612,6 +9612,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1155849724}
     - target: {fileID: 261615069844831368, guid: 0a3cb9f4a35cfad4a8808afab28a7bc1, type: 3}
+      propertyPath: MovementSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 261615069844831368, guid: 0a3cb9f4a35cfad4a8808afab28a7bc1, type: 3}
       propertyPath: ReloadAmmoTimer
       value: 1.5
       objectReference: {fileID: 0}
@@ -19441,6 +19445,22 @@ PrefabInstance:
     - target: {fileID: 5135803764109484335, guid: 322869454d4574747a08c56db2c62cb2, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6316116367696938297, guid: 322869454d4574747a08c56db2c62cb2, type: 3}
+      propertyPath: SightRange
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6316116367696938297, guid: 322869454d4574747a08c56db2c62cb2, type: 3}
+      propertyPath: AttackRange
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6316116367696938297, guid: 322869454d4574747a08c56db2c62cb2, type: 3}
+      propertyPath: MovementSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6316116367696938297, guid: 322869454d4574747a08c56db2c62cb2, type: 3}
+      propertyPath: ExplosionRange
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6419613262369378375, guid: 322869454d4574747a08c56db2c62cb2, type: 3}
       propertyPath: m_RootOrder

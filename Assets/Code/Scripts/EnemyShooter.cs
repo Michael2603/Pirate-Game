@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyShooter : BoatController
+public class EnemyShooter : EnemyController
 {
-    private bool _isEnemyInSight = false;
-
     private void FixedUpdate()
     {
         Movement();
@@ -13,9 +11,9 @@ public class EnemyShooter : BoatController
 
     private void Update()
     {
-        if (!ChasingEnemy())
+        if (!base.ChaseEnemy())
         {
-            WanderAround();
+            base.WanderAround();
         }
 
         // Constantly checks for ammunition.
@@ -29,98 +27,16 @@ public class EnemyShooter : BoatController
         }
     }
 
-    // Wander around the map avoiding colision with islands.
-    private void WanderAround()
+    protected override void Attack()
     {
-        RaycastHit2D leftRaycast = Physics2D.Raycast(transform.position, (transform.up + -transform.right), 4, 1 << LayerMask.NameToLayer("Island"));
-        RaycastHit2D middleRaycast = Physics2D.CircleCast(transform.position + transform.up * 2.2f, 1.3f,transform.forward, .1f, 1 << LayerMask.NameToLayer("Island"));
-        RaycastHit2D rightRaycast = Physics2D.Raycast(transform.position, (transform.up + transform.right), 4, 1 << LayerMask.NameToLayer("Island"));
-
-        // Keep straight.
-        if (!middleRaycast)
+        // Constantly rotates the boat to attack the enemy and if has enough ammunition, shoot.
+        if (AimOnEnemy() != 0)
         {
-            Rotate(0);
-            MoveForward(.3f);
-            return;
-        }
-        
-        // Rotate to the right.
-        if (leftRaycast)
-        {
-            Rotate(.5f);
-            MoveForward(.2f);
-        }
-        
-        // Rotate to the left.
-        if (rightRaycast)
-        {
-            Rotate(-.5f);
-            MoveForward(.2f);
-        }
-    }
-
-    // If the enemy is on sight, chase him.
-    private bool ChasingEnemy()
-    {
-        RaycastHit2D outOfAttackRaycast = Physics2D.CircleCast(transform.position, 8, transform.forward, .1f, 1 << LayerMask.NameToLayer("Player"));
-        RaycastHit2D inAttackRangeRaycast = Physics2D.CircleCast(transform.position, 5, transform.forward, .1f, 1 << LayerMask.NameToLayer("Player"));
-        
-        // If the enemy is within sight range, only chase him if this boat has direct sight to him.
-        if (outOfAttackRaycast)
-        {
-            RaycastHit2D visionObstructed = Physics2D.Linecast(
-                transform.position,
-                outOfAttackRaycast.collider.transform.position,
-                1 << LayerMask.NameToLayer("Island"));
-
-            if (visionObstructed)
+            if (base._canShoot)
             {
-                return false;
+                StartCoroutine(LateralShotPattern(AimOnEnemy()));
             }
         }
-        
-        // Aim and attack the enemy.
-        if (inAttackRangeRaycast)
-        {
-            // Constantly rotates the boat to attack the enemy and if has enough ammunition, shoot.
-            if (AimOnEnemy() != 0)
-            {
-                if (base._canShoot)
-                {
-                    StartCoroutine(LateralShotPattern(AimOnEnemy()));
-                }
-            }
-
-            return true;
-        }
-        // Persues the enemy until he enters the attack range
-        else if (outOfAttackRaycast && !inAttackRangeRaycast)
-        {
-            _isEnemyInSight = true;
-
-            // Gets position and angle in relation to the enemy and turns the boat so that it is in attack position in relation to the enemy.
-            Vector3 posRelativeToEnemy = transform.InverseTransformPoint(outOfAttackRaycast.transform.position);
-            float angleRelativeToEnemy = Mathf.Atan2(posRelativeToEnemy.y, posRelativeToEnemy.x) * Mathf.Rad2Deg;
-
-            if (Mathf.Abs(angleRelativeToEnemy) < 85)
-            {
-                base.Rotate(1);
-                base.MoveForward(.2f);
-            }
-            else if (Mathf.Abs(angleRelativeToEnemy) > 95)
-            {
-                base.Rotate(-1);
-                base.MoveForward(.2f);
-            }
-            else
-            {
-                base.Rotate(0);
-                base.MoveForward(.8f);
-            }
-
-            return true;
-        }
-        return false;
     }
 
     // Scans both sides and returns which one has an enemy within shooting range (30 degrees up or down on the sides).
@@ -129,7 +45,6 @@ public class EnemyShooter : BoatController
         RaycastHit2D raycast = Physics2D.CircleCast(transform.position, 5, transform.forward, .1f, 1 << LayerMask.NameToLayer("Player"));
         int direction = 0;
         base.MoveForward(0);
-
 
         if (raycast)
         {
@@ -151,7 +66,6 @@ public class EnemyShooter : BoatController
             {
                 base.Rotate(0);
             }
-
 
             // The player is within range if its position is 30 degrees up or down counting from the point perpendicular point to the boat.
             if (Mathf.Abs(angleRelativeToEnemy) - 15f < 15f)
@@ -217,20 +131,6 @@ public class EnemyShooter : BoatController
 
             yield return new WaitForSeconds(timer);
         }
-    }
-
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, 5);
-        
-        Gizmos.color = Color.white;
-        Gizmos.DrawWireSphere(transform.position, 8);
-
-        Gizmos.color = Color.black;
-        Gizmos.DrawRay(transform.position, (transform.up + -transform.right)  * 2.9f);
-        Gizmos.DrawWireSphere(transform.position + transform.up * 2.2f, 1.3f);
-        Gizmos.DrawRay(transform.position, (transform.up + transform.right) * 2.9f);
     }
 
     public override void TakeHit(int damage)

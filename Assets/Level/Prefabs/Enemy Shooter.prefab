@@ -153,7 +153,10 @@ MonoBehaviour:
   GameplayManager: {fileID: 0}
   ReloadAmmoTimer: 2
   CannonBall: {fileID: 4288485827351727061, guid: ed2c67e3316b0f0449d78ea8090b8899, type: 3}
+  MovementSpeed: 1
   CannonFireStrength: 3
+  AttackRange: 5
+  SightRange: 8
 --- !u!95 &1682290446
 Animator:
   serializedVersion: 4

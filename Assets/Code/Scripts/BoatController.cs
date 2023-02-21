@@ -7,9 +7,10 @@ using UnityEngine.UI;
 public class BoatController : MonoBehaviour
 {
     [HideInInspector] public int CurrentHealth;
-     public GameplayManager GameplayManager;
+    public GameplayManager GameplayManager;
     public float ReloadAmmoTimer;
     public GameObject CannonBall;
+    public float MovementSpeed;
 
     public float CannonFireStrength;
     protected float _cannonFireStrength
@@ -21,7 +22,6 @@ public class BoatController : MonoBehaviour
     private Animator _animator;
     private Slider _healthBar;
     private Material _healthBarMaterial;
-    private float _forwardMovementSpeed = 3;
     private float _rotationDirection;
     private float _moveForwardCurrentForce;
     private float _smoothMovementVelocity;
@@ -74,7 +74,7 @@ public class BoatController : MonoBehaviour
                 1f);
         }
 
-        _rigidbody2d.velocity = transform.up * _smoothMovementVelocity * _forwardMovementSpeed;
+        _rigidbody2d.velocity = transform.up * _smoothMovementVelocity * MovementSpeed;
 
 
         // Rotates the ship based on its current rotation and the input.
