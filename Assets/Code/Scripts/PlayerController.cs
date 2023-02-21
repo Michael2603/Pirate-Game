@@ -104,7 +104,7 @@ public class PlayerController : BoatController
     }
     private void OnRotate(InputValue value)
     {
-        _inputX = -value.Get<float>();
+        _inputX = value.Get<float>();
     }
 
     // Fires one cannonball forwards.
@@ -125,7 +125,7 @@ public class PlayerController : BoatController
             transform.rotation);
 
         Physics2D.IgnoreCollision(tempCannonBall.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-        tempCannonBall.GetComponent<Rigidbody2D>().AddForce(-transform.up * base._cannonFireStrength);
+        tempCannonBall.GetComponent<Rigidbody2D>().AddForce(transform.up * base._cannonFireStrength);
 
 
         StartCoroutine(ShakeCamera(0.8f, 0.1f));

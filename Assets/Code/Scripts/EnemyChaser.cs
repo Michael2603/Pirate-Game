@@ -21,40 +21,16 @@ public class EnemyChaser : BoatController
 
     private void Update()
     {
-
         if (!ChasingEnemy())
         {
             WanderAround();
         }
-
-        // // Looks for the player and if found, rotate the boat to face him.
-        // if (raycast)
-        // {
-        //     Vector3 posRelativeToPlayer = transform.InverseTransformPoint(raycast.transform.position);
-        //     float angleRelativeToPlayer = Mathf.Atan2(posRelativeToPlayer.y, posRelativeToPlayer.x) * Mathf.Rad2Deg;
-            
-        //     if (Mathf.Abs(angleRelativeToPlayer) < 85)
-        //     {
-        //         base.Rotate(1);
-        //         base.MoveForward(0);
-        //     }
-        //     else if (Mathf.Abs(angleRelativeToPlayer) > 95)
-        //     {
-        //         base.Rotate(-1);
-        //         base.MoveForward(0);
-        //     }
-        //     else
-        //     {
-        //         base.Rotate(0);
-        //         base.MoveForward(0.3f);
-        //     }
-        // }
     }
 
     // If the enemy is on sight, chase him.
     private bool ChasingEnemy()
     {
-        RaycastHit2D raycast = Physics2D.CircleCast(transform.position, 5, transform.forward, .1f, 1 << LayerMask.NameToLayer("Player"));
+        RaycastHit2D raycast = Physics2D.CircleCast(transform.position, 6, transform.forward, .1f, 1 << LayerMask.NameToLayer("Player"));
         
         // If the enemy is within sight range, only chase him if this boat has direct sight to him.
         if (raycast)
@@ -102,9 +78,9 @@ public class EnemyChaser : BoatController
     // Wander around the map avoiding colision with islands.
     private void WanderAround()
     {
-        RaycastHit2D leftRaycast = Physics2D.Raycast(transform.position, (-transform.up + -transform.right), 4, 1 << LayerMask.NameToLayer("Island"));
-        RaycastHit2D middleRaycast = Physics2D.CircleCast(transform.position + -transform.up * 2.2f, 1.3f,transform.forward, .1f, 1 << LayerMask.NameToLayer("Island"));
-        RaycastHit2D rightRaycast = Physics2D.Raycast(transform.position, (-transform.up + transform.right), 4, 1 << LayerMask.NameToLayer("Island"));
+        RaycastHit2D leftRaycast = Physics2D.Raycast(transform.position, (transform.up + -transform.right), 4, 1 << LayerMask.NameToLayer("Island"));
+        RaycastHit2D middleRaycast = Physics2D.CircleCast(transform.position + transform.up * 2.2f, 1.3f,transform.forward, .1f, 1 << LayerMask.NameToLayer("Island"));
+        RaycastHit2D rightRaycast = Physics2D.Raycast(transform.position, (transform.up + transform.right), 4, 1 << LayerMask.NameToLayer("Island"));
 
         // Keep straight.
         if (!middleRaycast)
@@ -128,20 +104,21 @@ public class EnemyChaser : BoatController
             MoveForward(.2f);
         }
     }
+
     void OnDrawGizmos()
     {
         // Sight area.
         Gizmos.color = Color.gray;
-        Gizmos.DrawWireSphere(transform.position, 5f);
+        Gizmos.DrawWireSphere(transform.position, 6f);
 
         // Explosion area.
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, ExplosionRange);
 
         Gizmos.color = Color.black;
-        Gizmos.DrawRay(transform.position, (-transform.up + -transform.right)  * 2.9f);
-        Gizmos.DrawWireSphere(transform.position + -transform.up * 2.2f, 1.3f);
-        Gizmos.DrawRay(transform.position, (-transform.up + transform.right) * 2.9f);
+        Gizmos.DrawRay(transform.position, (transform.up + -transform.right)  * 2.9f);
+        Gizmos.DrawWireSphere(transform.position + transform.up * 2.2f, 1.3f);
+        Gizmos.DrawRay(transform.position, (transform.up + transform.right) * 2.9f);
     }
 
     public override void TakeHit(int damage)

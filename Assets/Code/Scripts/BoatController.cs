@@ -74,13 +74,13 @@ public class BoatController : MonoBehaviour
                 1f);
         }
 
-        _rigidbody2d.velocity = -transform.up * _smoothMovementVelocity * _forwardMovementSpeed;
+        _rigidbody2d.velocity = transform.up * _smoothMovementVelocity * _forwardMovementSpeed;
 
 
         // Rotates the ship based on its current rotation and the input.
         if (_rotationDirection != 0)
         {
-            float angle = _rotationDirection * Mathf.Rad2Deg;
+            float angle = -_rotationDirection * Mathf.Rad2Deg;
             transform.localRotation *= Quaternion.Euler(Vector3.forward * angle * Time.deltaTime);
         }
     }

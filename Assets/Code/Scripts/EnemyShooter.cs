@@ -32,9 +32,9 @@ public class EnemyShooter : BoatController
     // Wander around the map avoiding colision with islands.
     private void WanderAround()
     {
-        RaycastHit2D leftRaycast = Physics2D.Raycast(transform.position, (-transform.up + -transform.right), 4, 1 << LayerMask.NameToLayer("Island"));
-        RaycastHit2D middleRaycast = Physics2D.CircleCast(transform.position + -transform.up * 2.2f, 1.3f,transform.forward, .1f, 1 << LayerMask.NameToLayer("Island"));
-        RaycastHit2D rightRaycast = Physics2D.Raycast(transform.position, (-transform.up + transform.right), 4, 1 << LayerMask.NameToLayer("Island"));
+        RaycastHit2D leftRaycast = Physics2D.Raycast(transform.position, (transform.up + -transform.right), 4, 1 << LayerMask.NameToLayer("Island"));
+        RaycastHit2D middleRaycast = Physics2D.CircleCast(transform.position + transform.up * 2.2f, 1.3f,transform.forward, .1f, 1 << LayerMask.NameToLayer("Island"));
+        RaycastHit2D rightRaycast = Physics2D.Raycast(transform.position, (transform.up + transform.right), 4, 1 << LayerMask.NameToLayer("Island"));
 
         // Keep straight.
         if (!middleRaycast)
@@ -140,12 +140,12 @@ public class EnemyShooter : BoatController
             if ( (angleRelativeToEnemy > 90 && angleRelativeToEnemy < 175) ||
                 (angleRelativeToEnemy < -5 && angleRelativeToEnemy > -90))
             {
-                base.Rotate(-.5f);
+                base.Rotate(.5f);
             }
             else if ( (angleRelativeToEnemy > 5 && angleRelativeToEnemy < 90) ||
                 (angleRelativeToEnemy > -175 && angleRelativeToEnemy < -90))
             {
-                base.Rotate(.5f);
+                base.Rotate(-.5f);
             }
             else
             {
@@ -196,7 +196,7 @@ public class EnemyShooter : BoatController
             }
 
             // Combine the current boat rotation and more 7 degrees between each bullet.
-            Quaternion newRotation = Quaternion.Euler(transform.forward * 7 * (-selectedPosition * direction)) * transform.rotation;
+            Quaternion newRotation = Quaternion.Euler(transform.forward * 7 * (selectedPosition * direction)) * transform.rotation;
             
             // Converts the rotation of the bullet so it can move to the left.
             if (direction == -1)
@@ -228,9 +228,9 @@ public class EnemyShooter : BoatController
         Gizmos.DrawWireSphere(transform.position, 8);
 
         Gizmos.color = Color.black;
-        Gizmos.DrawRay(transform.position, (-transform.up + -transform.right)  * 2.9f);
-        Gizmos.DrawWireSphere(transform.position + -transform.up * 2.2f, 1.3f);
-        Gizmos.DrawRay(transform.position, (-transform.up + transform.right) * 2.9f);
+        Gizmos.DrawRay(transform.position, (transform.up + -transform.right)  * 2.9f);
+        Gizmos.DrawWireSphere(transform.position + transform.up * 2.2f, 1.3f);
+        Gizmos.DrawRay(transform.position, (transform.up + transform.right) * 2.9f);
     }
 
     public override void TakeHit(int damage)
