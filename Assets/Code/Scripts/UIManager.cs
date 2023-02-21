@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text _scoreText;
+    [SerializeField] private TMP_Text _matchTimerText;
     [SerializeField] private TMP_Text _endGameScoreText;
     [SerializeField] private List<Image> cannonBallsIcons = new List<Image>();
 
@@ -16,9 +17,15 @@ public class UIManager : MonoBehaviour
     public GameObject EndGameUI;
     public GameObject GameHUD;
 
+
     private void Awake()
     {
         _gameplayManager = GameObject.Find("GameplayManager").GetComponent<GameplayManager>();
+    }
+
+    private void Update()
+    {
+        _matchTimerText.text = "Tempo restante:\n" + (int)_gameplayManager.MatchTimer / 60 + ":" + (int)_gameplayManager.MatchTimer % 60;
     }
 
     // Updates the UI text to match the current score.

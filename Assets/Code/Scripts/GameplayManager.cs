@@ -5,10 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class GameplayManager : MonoBehaviour
 {
-    public UIManager _uiManager; 
+    public UIManager _uiManager; // Trocar para privado depois
     private int _scoreAmount;
 
     [HideInInspector] public int GameDurationInSecounds;
+    [HideInInspector] public float MatchTimer;
     [HideInInspector] public int EnemySpawnInterval;
 
     private void Awake()
@@ -23,12 +24,24 @@ public class GameplayManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
+    private void FixedUpdate()
+    {
+        MatchTimer -= Time.deltaTime;
+
+        if (MatchTimer <= 0)
+        {
+            EndGame();
+        }
+    }
+
+
     // Keeps this manager active so the objects in game can use its data.
     private void OnLevelWasLoaded()
     {
         if (SceneManager.GetActiveScene().name == "GameScene")
         {
             _uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+            MatchTimer = GameDurationInSecounds;
         }
     }
 
@@ -56,6 +69,5 @@ public class GameplayManager : MonoBehaviour
     {
         _uiManager.ShowEndGameMenu(_scoreAmount);
         Time.timeScale = 0;
-
     }
 }
