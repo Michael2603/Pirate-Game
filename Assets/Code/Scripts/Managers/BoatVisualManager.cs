@@ -11,14 +11,14 @@ public class BoatVisualManager : MonoBehaviour
 
     [Header("Large Sails")][Space(5)]
     public List<Sprite> WhiteSailLargeList = new List<Sprite>();
-    public List<Sprite> RedSailLargeList = new List<Sprite>();
     public List<Sprite> BlackSailLargeList = new List<Sprite>();
+    public List<Sprite> RedSailLargeList = new List<Sprite>();
     [Space(10)]
 
     [Header("Small Sails")][Space(5)]
     public List<Sprite> WhiteSailSmallList = new List<Sprite>();
-    public List<Sprite> RedSailSmallList = new List<Sprite>();
     public List<Sprite> BlackSailSmallList = new List<Sprite>();
+    public List<Sprite> RedSailSmallList = new List<Sprite>();
     [Space(10)]
 
     [Header("Particles")][Space(5)]
@@ -35,12 +35,12 @@ public class BoatVisualManager : MonoBehaviour
     {
         // Stack the sails lists so it becomes a matrix.
         _sailLargeList.Add(WhiteSailLargeList);
-        _sailLargeList.Add(RedSailLargeList);
         _sailLargeList.Add(BlackSailLargeList);
+        _sailLargeList.Add(RedSailLargeList);
 
         _sailSmallList.Add(WhiteSailSmallList);
-        _sailSmallList.Add(RedSailSmallList);
         _sailSmallList.Add(BlackSailSmallList);
+        _sailSmallList.Add(RedSailSmallList);
 
         _boatComponenetsParticles = transform.GetChild(0).GetComponent<ParticleSystem>();
         _boatHullParticles = transform.GetChild(1).GetComponent<ParticleSystem>();
@@ -59,31 +59,37 @@ public class BoatVisualManager : MonoBehaviour
             case "White":
                 colorTagValue = 0;
             break;
-            case "Red":
+            case "Black":
                 colorTagValue = 1;
             break;
-            case "Black":
+            case "Red":
                 colorTagValue = 2;
             break;
         }
 
         switch(state)
         {
+            // Sets the default boat colors based on its tag.
+            case 0:
+                sailLarge.GetComponent<SpriteRenderer>().sprite = _sailLargeList[colorTagValue][state];
+                sailSmall.GetComponent<SpriteRenderer>().sprite = _sailSmallList[colorTagValue][state];
+                boat.transform.GetChild(0).Find("Flag").GetComponent<SpriteRenderer>().sprite = FlagList[colorTagValue];
+            break;
             // Visually damages the boat;
             case 1: 
-                hullLarge.GetComponent<SpriteRenderer>().sprite = HullList[state - 1];
+                hullLarge.GetComponent<SpriteRenderer>().sprite = HullList[state];
 
-                sailLarge.GetComponent<SpriteRenderer>().sprite = _sailLargeList[colorTagValue][state - 1];
-                sailSmall.GetComponent<SpriteRenderer>().sprite = _sailSmallList[colorTagValue][state - 1];
+                sailLarge.GetComponent<SpriteRenderer>().sprite = _sailLargeList[colorTagValue][state];
+                sailSmall.GetComponent<SpriteRenderer>().sprite = _sailSmallList[colorTagValue][state];
 
                 EmitParticle(boat.transform, CrewList[Random.Range(0, CrewList.ToArray().Length)], Random.Range(1, 3), .4f, .4f);
 
             break;
             // Destroys the small sail and visually damages the boat.
             case 2:
-                hullLarge.GetComponent<SpriteRenderer>().sprite = HullList[state - 1];
-                sailLarge.GetComponent<SpriteRenderer>().sprite = _sailLargeList[colorTagValue][state - 1];
-                sailSmall.GetComponent<SpriteRenderer>().sprite = _sailSmallList[colorTagValue][state - 1];
+                hullLarge.GetComponent<SpriteRenderer>().sprite = HullList[state];
+                sailLarge.GetComponent<SpriteRenderer>().sprite = _sailLargeList[colorTagValue][state];
+                sailSmall.GetComponent<SpriteRenderer>().sprite = _sailSmallList[colorTagValue][state];
 
                 EmitParticle(sailSmall.transform, sailSmall.GetComponent<SpriteRenderer>().sprite, 1, .65f, .12f);
                 sailSmall.gameObject.SetActive(false);
@@ -92,11 +98,11 @@ public class BoatVisualManager : MonoBehaviour
                 EmitParticle(boat.transform, CrewList[Random.Range(0, CrewList.ToArray().Length)], Random.Range(2, 4), .4f, .4f);
 
             break;
-            // Destroys the large sail, the nest and the flag.
+            // Destroys the original game object and launches the sail, hull and flag to the sea.
             case 3:
 
-                hullLarge.GetComponent<SpriteRenderer>().sprite = HullList[state - 1];
-                sailLarge.GetComponent<SpriteRenderer>().sprite = _sailLargeList[colorTagValue][state - 1];
+                hullLarge.GetComponent<SpriteRenderer>().sprite = HullList[state];
+                sailLarge.GetComponent<SpriteRenderer>().sprite = _sailLargeList[colorTagValue][state];
 
                 Transform boatFlag = boat.transform.GetChild(0).Find("Flag");
                 Transform boatNest = boat.transform.GetChild(0).Find("Nest");
@@ -105,18 +111,21 @@ public class BoatVisualManager : MonoBehaviour
                 EmitParticle(boatNest.transform, boatNest.GetComponent<SpriteRenderer>().sprite, 1, .3f, .28f);
                 EmitParticle(boatFlag.transform, boatFlag.GetComponent<SpriteRenderer>().sprite, 1, .1f, .35f);
 
-                sailLarge.gameObject.SetActive(false);
-                boatNest.gameObject.SetActive(false);
-                boatFlag.gameObject.SetActive(false);
-
                 EmitParticle(boat.transform, hullLarge.GetComponent<SpriteRenderer>().sprite, 1, .8f, 1.7f);
-                hullLarge.gameObject.SetActive(false);
                 
+
                 // Launches the crew.
                 EmitParticle(boat.transform, CrewList[Random.Range(0, CrewList.ToArray().Length)], Random.Range(2, 4), .4f, .4f);
+
+                Destroy(boat.transform.gameObject);
             break;
         }
-
+        
+        if (state == 0)
+        {
+            return;
+        }
+        
         // Throw randomly some woods.
         for (int i = 0; i < 4; i++)
         {
