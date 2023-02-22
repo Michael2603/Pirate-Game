@@ -13,12 +13,18 @@ public class BoatVisualManager : MonoBehaviour
     public List<Sprite> WhiteSailLargeList = new List<Sprite>();
     public List<Sprite> BlackSailLargeList = new List<Sprite>();
     public List<Sprite> RedSailLargeList = new List<Sprite>();
+    public List<Sprite> GreenSailLargeList = new List<Sprite>();
+    public List<Sprite> BlueSailLargeList = new List<Sprite>();
+    public List<Sprite> YellowSailLargeList = new List<Sprite>();
     [Space(10)]
 
     [Header("Small Sails")][Space(5)]
     public List<Sprite> WhiteSailSmallList = new List<Sprite>();
     public List<Sprite> BlackSailSmallList = new List<Sprite>();
     public List<Sprite> RedSailSmallList = new List<Sprite>();
+    public List<Sprite> GreenSailSmallList = new List<Sprite>();
+    public List<Sprite> BlueSailSmallList = new List<Sprite>();
+    public List<Sprite> YellowSailSmallList = new List<Sprite>();
     [Space(10)]
 
     [Header("Particles")][Space(5)]
@@ -37,10 +43,16 @@ public class BoatVisualManager : MonoBehaviour
         _sailLargeList.Add(WhiteSailLargeList);
         _sailLargeList.Add(BlackSailLargeList);
         _sailLargeList.Add(RedSailLargeList);
+        _sailLargeList.Add(GreenSailLargeList);
+        _sailLargeList.Add(BlueSailLargeList);
+        _sailLargeList.Add(YellowSailLargeList);
 
         _sailSmallList.Add(WhiteSailSmallList);
         _sailSmallList.Add(BlackSailSmallList);
         _sailSmallList.Add(RedSailSmallList);
+        _sailSmallList.Add(GreenSailSmallList);
+        _sailSmallList.Add(BlueSailSmallList);
+        _sailSmallList.Add(YellowSailSmallList);
 
         _boatComponenetsParticles = transform.GetChild(0).GetComponent<ParticleSystem>();
         _boatHullParticles = transform.GetChild(1).GetComponent<ParticleSystem>();
@@ -64,6 +76,15 @@ public class BoatVisualManager : MonoBehaviour
             break;
             case "Red":
                 colorTagValue = 2;
+            break;
+            case "Green":
+                colorTagValue = 3;
+            break;
+            case "Blue":
+                colorTagValue = 4;
+            break;
+            case "Yellow":
+                colorTagValue = 5;
             break;
         }
 
