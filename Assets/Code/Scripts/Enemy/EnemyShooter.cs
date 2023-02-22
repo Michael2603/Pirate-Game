@@ -125,6 +125,7 @@ public class EnemyShooter : EnemyController
             
             Physics2D.IgnoreCollision(tempCannonBall.GetComponent<Collider2D>(), GetComponent<Collider2D>());
             tempCannonBall.GetComponent<Rigidbody2D>().AddForce(-tempCannonBall.transform.right * base._cannonFireStrength);
+            tempCannonBall.GetComponent<CannonBallController>().PlaySound("Lateral");
 
             // Randomize a small time gap between each shot.
             float timer = Random.Range(0.05f, 0.21f);

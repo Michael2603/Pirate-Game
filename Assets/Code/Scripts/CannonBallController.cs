@@ -5,11 +5,30 @@ using UnityEngine;
 public class CannonBallController : MonoBehaviour
 {
     private TrailRenderer _trailRenderer;
+    private AudioSource _audioSource;
+
+    public List<AudioClip> AudioClips = new List<AudioClip>();
 
     private void Awake()
     {
         // Randomly changes the size of trails when instantiated.
         GetComponent<TrailRenderer>().widthMultiplier = Random.Range(.3f, 1.2f);
+        _audioSource = GetComponent<AudioSource>();
+    }
+
+    public void PlaySound(string position)
+    {
+        switch(position)
+        {
+            case "Frontal":
+                _audioSource.clip = AudioClips[0];
+            break;
+            case "Lateral":
+                _audioSource.clip = AudioClips[Random.Range(1, 4)];
+            break;
+        }
+
+        _audioSource.Play();
     }
 
     // Destroys itself and damages a boat if hit it.

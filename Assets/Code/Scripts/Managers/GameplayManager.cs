@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameplayManager : MonoBehaviour
 {
-    public UIManager _uiManager; // Trocar para privado depois
+    private UIManager _uiManager;
     private int _scoreAmount;
 
     [HideInInspector] public int GameDurationInSecounds;

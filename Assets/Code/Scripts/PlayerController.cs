@@ -76,6 +76,7 @@ public class PlayerController : BoatController
 
             Physics2D.IgnoreCollision(tempCannonBall.GetComponent<Collider2D>(), GetComponent<Collider2D>());
             tempCannonBall.GetComponent<Rigidbody2D>().AddForce(-tempCannonBall.transform.right * base._cannonFireStrength);
+            tempCannonBall.GetComponent<CannonBallController>().PlaySound("Lateral");
 
             // Randomize a small time gap between each shot and also shake the camera based on this time.
             float timer = Random.Range(0.05f, 0.21f);
@@ -126,6 +127,7 @@ public class PlayerController : BoatController
 
         Physics2D.IgnoreCollision(tempCannonBall.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         tempCannonBall.GetComponent<Rigidbody2D>().AddForce(transform.up * base._cannonFireStrength);
+        tempCannonBall.GetComponent<CannonBallController>().PlaySound("Frontal");
 
 
         StartCoroutine(ShakeCamera(0.8f, 0.1f));

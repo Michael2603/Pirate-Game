@@ -203,6 +203,11 @@ public class BoatController : MonoBehaviour
     public void VisualDamage(int state)
     {
        _boatVisualManager.ChangeVisual(this.gameObject, state);
+       
+       if (state > 1)
+       {
+            GetComponent<AudioSource>().Play();
+       }
     }
 
 
