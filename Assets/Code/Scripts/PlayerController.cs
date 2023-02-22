@@ -157,7 +157,7 @@ public class PlayerController : BoatController
         }
 
         // Emits arrows showing the current active side, also modifies particle attributes so arrows are facing the right direction.
-        ParticleSystem indicatorParticles = transform.GetChild(2).GetComponent<ParticleSystem>();
+        ParticleSystem indicatorParticles = transform.Find("LateralsIndicatorParticles").GetComponent<ParticleSystem>();
         var particlesShape = indicatorParticles.shape;
         var particlesRenderer = indicatorParticles.GetComponent<ParticleSystemRenderer>();
         var particlesVelocity = indicatorParticles.velocityOverLifetime;

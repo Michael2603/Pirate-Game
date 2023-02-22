@@ -50,9 +50,9 @@ public class BoatVisualManager : MonoBehaviour
     public void ChangeVisual(GameObject boat, int state)
     {
         int colorTagValue = 0;
-        Transform hullLarge = boat.transform.Find("HullLarge");
-        Transform sailLarge = boat.transform.Find("SailLarge");
-        Transform sailSmall = boat.transform.Find("SailSmall");
+        Transform hullLarge = boat.transform.GetChild(0).Find("HullLarge");
+        Transform sailLarge = boat.transform.GetChild(0).Find("SailLarge");
+        Transform sailSmall = boat.transform.GetChild(0).Find("SailSmall");
 
         switch (boat.tag)
         {
@@ -98,8 +98,8 @@ public class BoatVisualManager : MonoBehaviour
                 hullLarge.GetComponent<SpriteRenderer>().sprite = HullList[state - 1];
                 sailLarge.GetComponent<SpriteRenderer>().sprite = _sailLargeList[colorTagValue][state - 1];
 
-                Transform boatFlag = boat.transform.Find("Flag");
-                Transform boatNest = boat.transform.Find("Nest");
+                Transform boatFlag = boat.transform.GetChild(0).Find("Flag");
+                Transform boatNest = boat.transform.GetChild(0).Find("Nest");
 
                 EmitParticle(sailLarge.transform, sailLarge.GetComponent<SpriteRenderer>().sprite, 1, 1, .65f);
                 EmitParticle(boatNest.transform, boatNest.GetComponent<SpriteRenderer>().sprite, 1, .3f, .28f);
@@ -173,7 +173,6 @@ public class BoatVisualManager : MonoBehaviour
                 anchorObject.rotation).GetComponent<ParticleSystem>();
         }
 
-
         var particlesMain = tempParticles.main;
         particlesMain.startSizeX = sizeX;
         particlesMain.startSizeY = sizeY;
@@ -184,6 +183,4 @@ public class BoatVisualManager : MonoBehaviour
         tempParticles.GetComponent<ParticleSystemRenderer>().material.mainTexture = sprite.texture;
         tempParticles.Emit(amount);
     }
-
-
 }

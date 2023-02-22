@@ -42,12 +42,12 @@ public class BoatController : MonoBehaviour
         _animator = GetComponent<Animator>();
         GameplayManager = GameObject.Find("GameplayManager").GetComponent<GameplayManager>();
         _boatVisualManager = GameObject.Find("BoatVisualManager").GetComponent<BoatVisualManager>();
-        _healthBar = transform.GetChild(0).GetChild(0).gameObject.GetComponent<Slider>();
+        _healthBar = transform.Find("Canvas").GetChild(0).gameObject.GetComponent<Slider>();
 
 
 
         // Creates a material with default shader and applies to the health bar so its alpha channel can be manipulated later.
-        _healthBarMaterial = new Material(GetComponent<SpriteRenderer>().sharedMaterial.shader);
+        _healthBarMaterial = new Material(Shader.Find("Sprites/Default"));
         foreach (Image image in _healthBar.transform.GetComponentsInChildren<Image>())
         {
             image.material = _healthBarMaterial;
@@ -190,13 +190,13 @@ public class BoatController : MonoBehaviour
     [System.Obsolete]
     public void EmmitFlamesParticles()
     {
-        if (transform.GetChild(1).GetComponent<ParticleSystem>().emissionRate >= 2)
+        if (transform.Find("FireParticles").GetComponent<ParticleSystem>().emissionRate >= 2)
         {
-            transform.GetChild(1).GetComponent<ParticleSystem>().Stop();
+            transform.Find("FireParticles").GetComponent<ParticleSystem>().Stop();
         }
         else
         {
-            transform.GetChild(1).GetComponent<ParticleSystem>().emissionRate++;
+            transform.Find("FireParticles").GetComponent<ParticleSystem>().emissionRate++;
         }
     }
 
