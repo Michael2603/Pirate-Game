@@ -54,7 +54,7 @@ public class EnemyChaser : EnemyController
         }
 
         // Instantiates the explosion particle effects and reduces its health to 0.
-        Instantiate(transform.GetChild(2),transform.position,transform.rotation).gameObject.SetActive(true);
+        Instantiate(transform.Find("ExplosionParticles"),transform.position,transform.rotation).gameObject.SetActive(true);
         TakeHit(base.CurrentHealth);
     }
 
