@@ -7,7 +7,11 @@ public class BoatStateTransitionBehaviour : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       animator.gameObject.GetComponent<BoatController>().EmmitFlamesParticles();
+        animator.gameObject.GetComponent<BoatController>().EmmitFlamesParticles();
+        animator.SetInteger("CurrentState", animator.GetInteger("CurrentState") + 1);
+        
+        BoatController boatScript = animator.gameObject.GetComponent<BoatController>();
+        boatScript.VisualDamage(animator.GetInteger("CurrentState"));
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

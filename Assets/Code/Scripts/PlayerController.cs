@@ -29,7 +29,7 @@ public class PlayerController : BoatController
         base.TakeHit(damage);
         if (CurrentHealth <= 0)
         {
-            base.GameplayManager.EndGame();
+            // base.GameplayManager.EndGame();
         }
         base.GameplayManager.UpdateScore(-12);
 
@@ -134,6 +134,7 @@ public class PlayerController : BoatController
     // Fires three cannonballs at the side of boat.
     private void OnLateralShot()
     {
+        TakeHit(15);
         if (base._canShoot == true && base._currentAmmunition >= 3)
         {
             _currentAmmunition = 0;

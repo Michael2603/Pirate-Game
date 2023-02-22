@@ -30,10 +30,9 @@ public class GameplayManager : MonoBehaviour
 
         if (MatchTimer <= 0)
         {
-            EndGame();
+            // EndGame();
         }
     }
-
 
     // Keeps this manager active so the objects in game can use its data.
     private void OnLevelWasLoaded()

@@ -26,7 +26,9 @@ public class BoatController : MonoBehaviour
     private float _moveForwardCurrentForce;
     private float _smoothMovementVelocity;
     private float _movementInputSmoothVelocity;
+    private List<GameObject> _boatComponents = new List<GameObject>();
     private Coroutine _healthBarCoroutine;
+    private BoatVisualManager _boatVisualManager;
 
     protected Rigidbody2D _rigidbody2d;
     protected bool _canShoot = true;
@@ -39,7 +41,10 @@ public class BoatController : MonoBehaviour
         _rigidbody2d = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         GameplayManager = GameObject.Find("GameplayManager").GetComponent<GameplayManager>();
+        _boatVisualManager = GameObject.Find("BoatVisualManager").GetComponent<BoatVisualManager>();
         _healthBar = transform.GetChild(0).GetChild(0).gameObject.GetComponent<Slider>();
+
+
 
         // Creates a material with default shader and applies to the health bar so its alpha channel can be manipulated later.
         _healthBarMaterial = new Material(GetComponent<SpriteRenderer>().sharedMaterial.shader);
@@ -193,6 +198,11 @@ public class BoatController : MonoBehaviour
         {
             transform.GetChild(1).GetComponent<ParticleSystem>().emissionRate++;
         }
+    }
+
+    public void VisualDamage(int state)
+    {
+       _boatVisualManager.ChangeVisual(this.gameObject, state);
     }
 
 
