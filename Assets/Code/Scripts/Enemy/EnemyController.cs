@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// ----------------- Summary -----------------
+//  This class is a parent class of all enemy types and is responsible 
+//  for stipulating the automatic movement of the enemies such as,
+//  wander around the map when not attacking, chase the enemy based on its
+//  position and showing Gizmos on the editor to better viewing they behaviour.
+// -------------------------------------------
+
 public class EnemyController : BoatController
 {
     public float AttackRange, SightRange;

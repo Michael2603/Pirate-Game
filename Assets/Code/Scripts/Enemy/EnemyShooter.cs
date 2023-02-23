@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// ----------------- Summary -----------------
+//  This class is responsible for stipulating the attacks of the 
+//  Shooter type of enemy and its singularities like ammunition 
+//  dependences. This class also inherits the Boat Controllers and 
+//  Enemy controllers so it can use the default features of both.
+// -------------------------------------------
+
 public class EnemyShooter : EnemyController
 {
     private void FixedUpdate()

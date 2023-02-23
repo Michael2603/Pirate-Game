@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// ----------------- Summary -----------------
+//  This class is responsible for holding the core of the gameplay,
+//  such as game duration, enemy spawn and score. It also calls the
+//  functions on UIManager to update the HUD based on the data here stored.
+// -------------------------------------------
+
 public class GameplayManager : MonoBehaviour
 {
     private UIManager _uiManager;
@@ -26,11 +32,16 @@ public class GameplayManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (SceneManager.GetActiveScene().name != "GameScene")
+        {
+            return;
+        }
+        
         MatchTimer -= Time.deltaTime;
 
         if (MatchTimer <= 0)
         {
-            // EndGame();
+            EndGame();
         }
     }
 

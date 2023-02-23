@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// ----------------- Summary -----------------
+//  This class is responsible for constantly monitoring the current
+//  enemies in-game and respawning them when necessary.
+// -------------------------------------------
+
 public class SpawnManager : MonoBehaviour
 {
     public List<Transform> SpawnList = new List<Transform>();

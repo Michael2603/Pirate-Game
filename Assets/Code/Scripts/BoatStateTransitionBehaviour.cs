@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// ----------------- Summary -----------------
+//  This class is used between every animator state switch.
+//  here are passed to the boat the current state of the boat so
+//  the boat can easily change its appearence based on that information. 
+// -------------------------------------------
+
 public class BoatStateTransitionBehaviour : StateMachineBehaviour
 {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state

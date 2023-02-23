@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+// ----------------- Summary -----------------
+//  This class is responsible for stipulating the singularities 
+//  of the Chaser enemy type, such as explosion on colision. 
+//  This class also inherits the Boat Controllers and 
+//  Enemy controllers scripts so it can use the default features of both.
+// -------------------------------------------
+
 public class EnemyChaser : EnemyController
 {
     public float ExplosionRange;

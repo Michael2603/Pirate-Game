@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// ----------------- Summary -----------------
+//  This class is responsible for making the Cannon Ball interactions
+//  in the game, such as colision, particles and sound triggers.
+// -------------------------------------------
+
 public class CannonBallController : MonoBehaviour
 {
     private TrailRenderer _trailRenderer;

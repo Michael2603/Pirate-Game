@@ -5,6 +5,12 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
+// ----------------- Summary -----------------
+//  This class is only responsible for the menu interactions.
+//  Here are managed the transitions between submenus and the
+//  desired funcions of the buttons and options avaliables in it.
+// -------------------------------------------
+
 public class MenuManager : MonoBehaviour
 {
     public GameplayManager GameplayManager;

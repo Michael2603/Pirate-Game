@@ -4,6 +4,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
 
+// ----------------- Summary -----------------
+//  This class is responsible for taking input from the player
+//  and converting into the boat controlers. It inherits the boat class
+//  so it can use the default boat features and applying to these commands.
+// -------------------------------------------
+
 public class PlayerController : BoatController
 {
     private float _inputX;

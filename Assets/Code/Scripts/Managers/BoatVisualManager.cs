@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// ----------------- Summary -----------------
+//  This class is responsible for holding all the boat parts sprites
+//  and helping the boats to change its appearence based on they health
+//  stage. This class also separates the broken parts of the boats.
+// -------------------------------------------
+
 public class BoatVisualManager : MonoBehaviour
 {
     [Header("Hull and Flag")][Space(5)]

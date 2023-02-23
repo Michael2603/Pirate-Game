@@ -5,6 +5,12 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 
+// ----------------- Summary -----------------
+//  This class is responsible for updating the UI elements on screen
+//  such as score, texts and ammunition icons. Here is also managed the
+//  transitions of end of the game and return to menu screen.
+// -------------------------------------------
+
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text _scoreText;

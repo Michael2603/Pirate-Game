@@ -4,6 +4,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
+// ----------------- Summary -----------------
+//  This class is a parent and is responsible for having all of the
+//  features that both enemies and player boats can share, such as
+//  movement, ammunition, health and damage stage. This class also 
+//  calls the Gameplay Manager to update the world data when necessary.
+// -------------------------------------------
+
 public class BoatController : MonoBehaviour
 {
     [HideInInspector] public int CurrentHealth;
